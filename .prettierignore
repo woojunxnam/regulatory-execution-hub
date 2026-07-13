@@ -1,0 +1,12 @@
+.next
+.tools
+.nvmrc
+node_modules
+coverage
+playwright-report
+test-results
+artifacts
+package-lock.json
+blueprint.md
+blueprint_v0.2.md
+codex_master_build_prompt.md

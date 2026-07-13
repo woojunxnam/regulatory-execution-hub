@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #172426;
+  --color-muted: #556568;
+  --color-paper: #f5f7f3;
+  --color-surface: #ffffff;
+  --color-line: #d8dfda;
+  --color-teal: #165f62;
+  --color-teal-dark: #0c4548;
+  --color-sage: #dce9df;
+  --color-gold: #a56719;
+  --color-gold-soft: #f7ead6;
+  --color-rose: #9b3b43;
+  --color-rose-soft: #f8e4e5;
+  --color-blue-soft: #e4edf7;
+  --font-sans: "Aptos", "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+}
+
+:root {
+  color-scheme: light;
+  --shadow-soft: 0 16px 46px rgb(21 58 57 / 8%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 5% 0%, rgb(220 233 223 / 65%), transparent 30rem), var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-underline-offset: 0.2em;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid #b56f18;
+  outline-offset: 3px;
+}
+
+::selection {
+  background: #c7dcce;
+}
+
+.prose-copy p + p {
+  margin-top: 0.9rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+  border-bottom: 1px solid var(--color-line);
+  padding: 0.85rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table th {
+  background: #eef3ef;
+  color: #344649;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.data-table tbody tr:hover {
+  background: #f8faf8;
+}
+
+@media (max-width: 760px) {
+  .data-table {
+    min-width: 760px;
+  }
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 10pt;
+  }
+
+  .no-print,
+  header,
+  footer {
+    display: none !important;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .print-break-avoid {
+    break-inside: avoid;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    overflow-wrap: anywhere;
+  }
+}
