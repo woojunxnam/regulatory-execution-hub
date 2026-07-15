@@ -37,3 +37,9 @@ Build the narrow Phase 2 vertical slice defined by the authoritative prompt. Cur
 ## Environment notes
 
 The host initially lacked Node.js/npm and GitHub CLI. A checksum-verified portable Node.js distribution is kept under ignored `.tools/` for local validation. No GitHub remote was available during discovery.
+
+## Current repository connection
+
+2026-07-15 재검증 결과 `origin`은 `https://github.com/woojunxnam/regulatory-execution-hub.git`에 연결되어 있고, `main`과 `origin/main`은 commit `5d81907626b69cc8f8fc6e0bf8868827f4e81a90`에서 동기화되어 있습니다. 위의 “No GitHub remote was available during discovery”는 최초 discovery 당시의 historical fact이며 현재 상태가 아닙니다.
+
+GitHub에는 `github-pages` deployment record가 있지만 application deployment는 아닙니다. 환경 URL은 repository `README.md`를 렌더링하고 CTD route는 `404`를 반환하므로, Vercel production deployment와 URL 기반 검증이 계속 필요합니다.
