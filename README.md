@@ -4,12 +4,21 @@ An evidence-linked FDA/EMA regulatory execution-support prototype. The first ver
 
 ## Deployment status
 
-2026-07-15 기준으로 application production deployment는 아직 검증되지 않았습니다.
+Production: `https://regulatory-execution-hub.vercel.app`
 
-- GitHub Pages deployment `https://woojunxnam.github.io/regulatory-execution-hub/`는 repository `README.md`만 렌더링합니다.
-- `/submission-navigator/ctd` 및 나머지 application route는 해당 URL에서 `404`를 반환합니다.
-- production target은 Vercel Git integration이며, `main`을 Production Branch로 사용합니다.
-- Vercel project 연결과 실제 production URL 검증이 완료되기 전에는 이 repository를 공개 실행 중인 website로 간주하지 않습니다.
+2026-07-15에 Vercel Git integration으로 `main`의 commit `5d81907626b69cc8f8fc6e0bf8868827f4e81a90`을 production deployment하고 검증했습니다.
+
+- Project: `regulatory-execution-hub`
+- Application Preset: `Next.js`
+- Root Directory: repository root
+- Production Branch: `main`
+- Node.js: `package.json`의 `>=24.18.0` engine이 Vercel `24.x` runtime에 매핑됨
+- Environment Variables: none
+- HTTP: `/`와 6개 CTD/methodology route 모두 `200`
+- Production Playwright: desktop/mobile 합계 `28/28` pass
+- Official-source links: `5/5` HTTP `200`
+
+GitHub Pages URL `https://woojunxnam.github.io/regulatory-execution-hub/`는 legacy repository `README.md` 렌더링이며 application URL이 아닙니다.
 
 ## Local setup
 
@@ -36,6 +45,13 @@ npm run test:e2e
 ```
 
 `npm run validate` runs the full sequence. Browser tests use installed Microsoft Edge by default.
+
+실제 deployment를 재검증하려면 PowerShell에서 다음을 실행합니다.
+
+```powershell
+$env:PLAYWRIGHT_BASE_URL="https://regulatory-execution-hub.vercel.app"
+npm run test:e2e
+```
 
 ## Content architecture
 

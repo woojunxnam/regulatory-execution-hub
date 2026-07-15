@@ -42,4 +42,6 @@ The host initially lacked Node.js/npm and GitHub CLI. A checksum-verified portab
 
 2026-07-15 재검증 결과 `origin`은 `https://github.com/woojunxnam/regulatory-execution-hub.git`에 연결되어 있고, `main`과 `origin/main`은 commit `5d81907626b69cc8f8fc6e0bf8868827f4e81a90`에서 동기화되어 있습니다. 위의 “No GitHub remote was available during discovery”는 최초 discovery 당시의 historical fact이며 현재 상태가 아닙니다.
 
-GitHub에는 `github-pages` deployment record가 있지만 application deployment는 아닙니다. 환경 URL은 repository `README.md`를 렌더링하고 CTD route는 `404`를 반환하므로, Vercel production deployment와 URL 기반 검증이 계속 필요합니다.
+GitHub의 `github-pages` deployment record는 application deployment가 아닙니다. 해당 환경 URL은 repository `README.md`를 렌더링하고 CTD route는 `404`를 반환합니다.
+
+2026-07-15에 Vercel Git integration을 연결하고 `main` commit `5d81907626b69cc8f8fc6e0bf8868827f4e81a90`을 `https://regulatory-execution-hub.vercel.app`에 production deployment했습니다. 실제 URL을 대상으로 HTTP, desktop/mobile, keyboard, accessibility, console, filter, export, print, official-source link, editorial-draft 및 educational-use boundary를 검증했습니다.

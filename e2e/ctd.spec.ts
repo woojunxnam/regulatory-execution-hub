@@ -56,6 +56,42 @@ test("Source-to-CTD Matrix exposes missing and superseded filters", async ({ pag
   await expect(page.getByText("Historical analytical procedure summary")).toBeVisible();
 });
 
+test("exports filtered matrix and authoring packet files", async ({ page }) => {
+  await page.goto("/submission-navigator/ctd/source-matrix");
+  await page.getByLabel("Approval status").selectOption("missing");
+
+  const csvDownloadPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export filtered CSV" }).click();
+  const csvDownload = await csvDownloadPromise;
+  expect(csvDownload.suggestedFilename()).toBe("source-to-ctd-matrix.csv");
+
+  await page.goto("/submission-navigator/ctd/module-3/drug-product/3-2-p-5");
+  const packetDownloadPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export text packet" }).click();
+  const packetDownload = await packetDownloadPromise;
+  expect(packetDownload.suggestedFilename()).toBe("3-2-p-5-authoring-packet.txt");
+});
+
+test("public reference page exposes draft and educational-use boundaries", async ({ page }) => {
+  await page.goto("/submission-navigator/ctd/module-3/drug-product/3-2-p-5");
+
+  await expect(
+    page.getByText(
+      "Editorial draft — source verification required. No qualified human review record is attached.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Independent educational decision support", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(
+      "This state is calculated from visible demonstration fields. It is not an agency completeness or filing decision and is not produced by an LLM.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+});
+
 test("3.2.P.5 has no detectable WCAG A/AA axe violations", async ({ page }) => {
   await page.goto("/submission-navigator/ctd/module-3/drug-product/3-2-p-5");
   const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();

@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Deployment & Phase 2 Hardening. CTD Authoring Foundation의 첫 vertical slice는 `main`에 병합되었고, 현재 gate는 Vercel production deployment입니다.
+Deployment & Phase 2 Hardening. Vercel production gate는 통과했고, 다음 gate는 review-record workflow 및 추가 Module 3 section 확장입니다.
 
 ## Completed
 
@@ -17,6 +17,9 @@ Deployment & Phase 2 Hardening. CTD Authoring Foundation의 첫 vertical slice�
 - Unit, component, route, keyboard, axe, console, responsive, print, and production-build validation
 - GitHub remote 연결 및 `main`/`origin/main` 동기화 재검증
 - portable Node.js `v24.18.0`을 사용한 clean install 및 전체 baseline 재검증
+- Vercel GitHub App 연결, project import, `main` production deployment 및 canonical domain 할당
+- production URL 기반 route, desktop/mobile, keyboard, axe, console, filter, CSV/text export, print, official-source link 및 trust-boundary 검증
+- `PLAYWRIGHT_BASE_URL`을 사용한 repeatable external-deployment Playwright validation
 
 ## Decisions and assumptions
 
@@ -36,8 +39,8 @@ Deployment & Phase 2 Hardening. CTD Authoring Foundation의 첫 vertical slice�
 - Only Module 3 `3.2.P.5` is fully implemented.
 - No application-specific intake, confidential workspace, persistence, authentication, or GxP controls.
 - Readiness is a demonstration authoring workflow state, not an agency completeness determination.
-- Vercel project와 production URL은 아직 검증되지 않았습니다.
 - GitHub Pages environment URL `https://woojunxnam.github.io/regulatory-execution-hub/`는 application이 아니라 repository `README.md`를 렌더링합니다. `/submission-navigator/ctd` 및 나머지 application route는 `404`를 반환하므로 production website evidence로 사용할 수 없습니다.
+- Vercel production은 현재 `main`의 first vertical slice만 제공합니다. 이 feature branch의 hardening test 변경은 PR merge 전까지 production content에 포함되지 않습니다.
 
 ## Repository and deployment evidence
 
@@ -46,8 +49,13 @@ Deployment & Phase 2 Hardening. CTD Authoring Foundation의 첫 vertical slice�
 - Repository visibility: `public`
 - GitHub Pages deployment record: `success` for commit `5d81907626b69cc8f8fc6e0bf8868827f4e81a90`
 - GitHub Pages application-route check: root `200` (README rendering), all six CTD/methodology routes `404`
-- Vercel dashboard check: authentication required; no project or production deployment could be verified without account authorization
-- Verified application production URL: none
+- Vercel project: `namwoojun/regulatory-execution-hub`
+- Production deployment ID: `dpl_BS7VyaL8yhDP8ueQCpxk1xtPcg7R`
+- Production commit: `5d81907626b69cc8f8fc6e0bf8868827f4e81a90`
+- Verified application production URL: `https://regulatory-execution-hub.vercel.app`
+- Production route check: `/` and all six CTD/methodology routes returned `200`
+- Production browser validation: Playwright `28/28` pass across desktop Edge and mobile emulation
+- Official-source link health: five prominent ICH/EMA/FDA links returned `200`
 
 ## Validation result
 
@@ -57,7 +65,8 @@ Deployment & Phase 2 Hardening. CTD Authoring Foundation의 첫 vertical slice�
 - Strict TypeScript check: pass
 - Vitest: 5 files, 12 tests passed
 - Next.js production build: pass; all application routes statically rendered
-- Playwright production-server review: 24 tests passed across desktop Edge and mobile emulation
+- Playwright local production-server review: 24 tests passed across desktop Edge and mobile emulation
+- Playwright external production review: 28 tests passed across desktop Edge and mobile emulation
 - axe WCAG A/AA scan: no detected violations on the `3.2.P.5` reference page
 - Keyboard controls, print media, source filters, console errors, and desktop/mobile screenshots: pass
 - npm audit: 0 known vulnerabilities after the lock-file override for patched PostCSS
@@ -73,10 +82,17 @@ npm run build
 npm run test:e2e
 ```
 
+External production validation:
+
+```powershell
+$env:PLAYWRIGHT_BASE_URL="https://regulatory-execution-hub.vercel.app"
+npm run test:e2e
+```
+
 ## Remaining tasks in dependency order
 
-1. Vercel에 로그인하고 Git repository `woojunxnam/regulatory-execution-hub`를 새 project로 import합니다. Framework Preset은 `Next.js`, Root Directory는 repository root, Production Branch는 `main`, Node.js는 `24.x`, Environment Variables는 none으로 설정합니다.
-2. 실제 production URL과 deployment commit SHA를 확보한 뒤 모든 route, desktop/mobile layout, keyboard/focus, console, filters/export, print, official-source links, editorial-draft 및 educational-use limitation을 검증합니다.
-3. production URL과 검증 evidence를 `README.md` 및 이 문서에 기록합니다.
-4. Qualified regulatory reviewer가 제공되지 않는 한 `3.2.P.5` content는 draft로 유지하면서 review-record schema/workflow를 구현합니다.
-5. 이후에만 `3.2.P.1`, `3.2.P.2`, `3.2.P.3`, `3.2.P.7`, `3.2.P.8` 및 linked `2.3` traceability를 validated section model로 확장합니다.
+1. Qualified regulatory reviewer가 제공되지 않은 현재 상태를 유지하면서 `3.2.P.5` review-record schema/workflow를 구현합니다.
+2. `3.2.P.1`, `3.2.P.2`, `3.2.P.3`, `3.2.P.7`, `3.2.P.8`을 validated section model로 확장합니다.
+3. Linked Module `2.3` Quality Overall Summary traceability를 구현합니다.
+4. Cross-module consistency rules와 reviewer-readiness fixtures를 확장합니다.
+5. Source/content version history와 citation validation을 강화하고 Phase 2 exit criteria를 재평가합니다.
