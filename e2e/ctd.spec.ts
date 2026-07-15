@@ -9,8 +9,32 @@ const routes = [
     heading: "Drug Product section index",
   },
   {
+    path: "/submission-navigator/ctd/module-2/quality-overall-summary",
+    heading: "Quality Overall Summary traceability",
+  },
+  {
+    path: "/submission-navigator/ctd/module-3/drug-product/3-2-p-1",
+    heading: "Description and Composition of the Drug Product",
+  },
+  {
+    path: "/submission-navigator/ctd/module-3/drug-product/3-2-p-2",
+    heading: "Pharmaceutical Development",
+  },
+  {
+    path: "/submission-navigator/ctd/module-3/drug-product/3-2-p-3",
+    heading: "Manufacture",
+  },
+  {
     path: "/submission-navigator/ctd/module-3/drug-product/3-2-p-5",
     heading: "Control of Drug Product",
+  },
+  {
+    path: "/submission-navigator/ctd/module-3/drug-product/3-2-p-7",
+    heading: "Container-Closure System",
+  },
+  {
+    path: "/submission-navigator/ctd/module-3/drug-product/3-2-p-8",
+    heading: "Stability",
   },
   { path: "/submission-navigator/ctd/source-matrix", heading: "Source-to-CTD Matrix" },
   { path: "/methodology", heading: "Methodology & limitations" },

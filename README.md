@@ -1,39 +1,48 @@
 # Regulatory Execution Hub
 
-An evidence-linked FDA/EMA regulatory execution-support prototype. The first vertical slice helps users understand and assess authoring readiness for CTD Module 3, with a reference implementation for `3.2.P.5 — Control of Drug Product`.
+FDA/EMA 규제 실행을 위한 evidence-linked educational decision-support prototype입니다. 현재 Phase 2 foundation은 CTD Module 3 Drug Product의 여섯 section과 linked Module `2.3` traceability를 통해 source readiness, consistency, version history, reviewer preparation을 구조화합니다.
 
-## Deployment status
+## Deployment 상태
 
 Production: `https://regulatory-execution-hub.vercel.app`
 
-2026-07-15에 Vercel Git integration으로 `main`의 commit `5d81907626b69cc8f8fc6e0bf8868827f4e81a90`을 production deployment하고 검증했습니다.
+Vercel Git integration으로 `main`의 commit `5d81907626b69cc8f8fc6e0bf8868827f4e81a90`을 production deployment하고 `2026-07-15`에 검증했습니다.
 
 - Project: `regulatory-execution-hub`
 - Application Preset: `Next.js`
 - Root Directory: repository root
 - Production Branch: `main`
-- Node.js: `package.json`의 `>=24.18.0` engine이 Vercel `24.x` runtime에 매핑됨
+- Node.js: `package.json`의 `>=24.18.0` engine을 사용
 - Environment Variables: none
-- HTTP: `/`와 6개 CTD/methodology route 모두 `200`
-- Production Playwright: desktop/mobile 합계 `28/28` pass
-- Official-source links: `5/5` HTTP `200`
+- Production baseline Playwright: desktop/mobile 합계 `28/28` pass
+- Official-source links: unique URL `5/5` HTTP `200`
 
-GitHub Pages URL `https://woojunxnam.github.io/regulatory-execution-hub/`는 legacy repository `README.md` 렌더링이며 application URL이 아닙니다.
+현재 `codex/deployment-phase2-hardening` branch의 확장 내용은 아직 `main` production에 포함되지 않았습니다. GitHub Pages URL `https://woojunxnam.github.io/regulatory-execution-hub/`는 legacy repository `README.md` 렌더링이며 application URL이 아닙니다.
 
-## Local setup
+## 구현 범위
 
-Node.js 24.18.0 or later is required.
+- CTD Builder와 Module 3 Drug Product navigation
+- `3.2.P.1`, `3.2.P.2`, `3.2.P.3`, `3.2.P.5`, `3.2.P.7`, `3.2.P.8` structured editorial draft
+- linked Module `2.3` Quality Overall Summary traceability
+- source-to-CTD matrix와 text/CSV authoring packet export
+- deterministic authoring-readiness와 cross-module consistency rules
+- source/content version history 및 citation integrity validation
+- content version과 source-set hash에 고정된 qualified `ReviewRecord` workflow
+
+모든 published section은 `source_verification_required` 상태입니다. 실제 qualified review evidence가 없으므로 `human_reviewed` 또는 `reviewer_ready`로 표시하지 않습니다.
+
+## Local 실행
+
+Node.js `24.18.0` 이상이 필요합니다.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Open `http://localhost:3000/submission-navigator/ctd`.
+`http://localhost:3000/submission-navigator/ctd`를 엽니다.
 
-현재 deployment slice의 재현 가능한 baseline은 `npm ci` 후 `npm run validate`입니다.
-
-## Quality commands
+## Quality 명령
 
 ```bash
 npm run format:check
@@ -44,9 +53,9 @@ npm run build
 npm run test:e2e
 ```
 
-`npm run validate` runs the full sequence. Browser tests use installed Microsoft Edge by default.
+`npm run validate`는 위 sequence 전체를 실행합니다. Browser test는 기본적으로 installed Microsoft Edge를 사용합니다.
 
-실제 deployment를 재검증하려면 PowerShell에서 다음을 실행합니다.
+실제 production을 재검증하려면 PowerShell에서 다음을 실행합니다.
 
 ```powershell
 $env:PLAYWRIGHT_BASE_URL="https://regulatory-execution-hub.vercel.app"
@@ -55,13 +64,13 @@ npm run test:e2e
 
 ## Content architecture
 
-- CTD schemas and deterministic readiness logic: `src/lib/ctd/`
-- Structured section and source-matrix data: `src/data/ctd/`
+- CTD schema, integrity, deterministic rules: `src/lib/ctd/`
+- Structured section, traceability, source-matrix data: `src/data/ctd/`
 - Reusable regulatory UI: `src/components/ctd/`
 - Routes: `src/app/submission-navigator/ctd/`
 
-To add a section, create a structured record, validate it with `ctdSectionSchema`, add its index metadata, and render it through reusable CTD components. Do not embed new regulatory rules only in page components.
+새 section은 `ctdSectionSchema`로 검증되는 structured record로 추가하고 reusable detail component로 렌더링합니다. Regulatory business rule은 UI component에 직접 숨기지 않습니다.
 
 ## Regulatory boundary
 
-This project is an independent educational decision-support prototype. It is not affiliated with FDA, EMA, the European Commission, or ICH; it is not legal or regulatory advice; and it is not a validated GxP system. Demonstration data must not contain confidential product, patient, or dossier information.
+이 project는 independent educational decision-support prototype입니다. FDA, EMA, European Commission 또는 ICH와 제휴하지 않았고 legal/regulatory advice, final regulatory determination 또는 validated GxP system이 아닙니다. Confidential product, patient 또는 dossier information을 입력하거나 저장해서는 안 됩니다.

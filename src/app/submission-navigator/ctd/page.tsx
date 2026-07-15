@@ -20,13 +20,14 @@ const modules = [
   {
     id: "Module 2",
     title: "Summaries and overviews",
-    note: "Quality, nonclinical, and clinical overview/summary relationships are planned.",
-    status: "Planned",
+    note: "Quality Overall Summary traceability to the available Module 3 Drug Product foundation is available; other summaries remain planned.",
+    status: "Available",
+    href: "/submission-navigator/ctd/module-2/quality-overall-summary",
   },
   {
     id: "Module 3",
     title: "Quality",
-    note: "Drug Product foundation and the 3.2.P.5 reference implementation are available.",
+    note: "Six Drug Product sections and their reusable evidence, consistency, version, and review workflow are available.",
     status: "Available",
     href: "/submission-navigator/ctd/module-3",
   },

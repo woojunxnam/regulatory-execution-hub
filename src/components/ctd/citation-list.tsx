@@ -36,6 +36,20 @@ export function CitationList({ citations }: { citations: RegulatoryCitation[] })
             </div>
           </dl>
           <p className="text-muted mt-3 text-sm leading-6">{citation.note}</p>
+          <details className="border-line mt-4 border-t pt-3">
+            <summary className="text-teal cursor-pointer text-sm font-semibold">
+              Source version history ({citation.versionHistory.length})
+            </summary>
+            <ol className="text-muted mt-3 space-y-3 text-xs leading-5">
+              {citation.versionHistory.map((version) => (
+                <li key={`${version.versionLabel}-${version.verifiedDate}`}>
+                  <span className="text-ink font-semibold">{version.versionLabel}</span>
+                  {` · ${version.sourceStatus} · verified ${version.verifiedDate}`}
+                  <span className="mt-1 block">{version.note}</span>
+                </li>
+              ))}
+            </ol>
+          </details>
         </li>
       ))}
     </ol>

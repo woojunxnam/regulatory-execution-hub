@@ -1,4 +1,5 @@
 import type { CtdSection } from "@/lib/ctd/schema";
+import { calculateSourceSetHash } from "@/lib/ctd/integrity";
 
 export type ReadinessState =
   "not_ready" | "ready_for_initial_drafting" | "ready_for_final_authoring" | "reviewer_ready";
@@ -118,11 +119,14 @@ export function evaluateAuthoringReadiness(section: CtdSection): ReadinessResult
     reviewerBlockers.push("No official citations are recorded.");
   }
 
+  const resolvedConsistencyStatuses = new Set(["pass", "intentional_difference"]);
   const criticalDiscrepancies = section.consistencyChecks.filter(
-    (check) => check.severity === "critical" && check.status === "unresolved",
+    (check) => check.severity === "critical" && !resolvedConsistencyStatuses.has(check.status),
   );
   reviewerBlockers.push(
-    ...criticalDiscrepancies.map((check) => `Critical discrepancy is unresolved: ${check.label}`),
+    ...criticalDiscrepancies.map(
+      (check) => `Critical discrepancy is ${check.status.replaceAll("_", " ")}: ${check.label}`,
+    ),
   );
 
   if (!section.readinessContext.reviewCommentsClosed) {
@@ -130,6 +134,20 @@ export function evaluateAuthoringReadiness(section: CtdSection): ReadinessResult
   }
   if (!section.lastVerifiedDate || !section.contentVersion) {
     reviewerBlockers.push("Verification metadata is incomplete.");
+  }
+
+  const currentSourceSetHash = calculateSourceSetHash(section.officialSources);
+  const approvedCurrentReview = section.reviewRecords.find(
+    (record) =>
+      record.entityId === section.sectionId &&
+      record.contentVersion === section.contentVersion &&
+      record.sourceSetHash === currentSourceSetHash &&
+      record.result === "approved",
+  );
+  if (!approvedCurrentReview || section.editorialReviewStatus !== "human_reviewed") {
+    reviewerBlockers.push(
+      "No approved qualified review record matches the current content version and source set.",
+    );
   }
 
   if (reviewerBlockers.length > 0) {
@@ -155,7 +173,7 @@ export function evaluateAuthoringReadiness(section: CtdSection): ReadinessResult
       "Reviewer-ready is an internal demonstration workflow state, not an FDA or EMA completeness decision.",
     ],
     nextActions: [
-      "Route the section to qualified human regulatory review and record the resulting review record.",
+      "Preserve the approved review record and repeat qualified review if the content version or source set changes.",
     ],
   };
 }
