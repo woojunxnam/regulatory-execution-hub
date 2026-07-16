@@ -214,6 +214,34 @@ test("regulatory updates expose official-source and review boundaries", async ({
   await expect(page.getByText("source checked", { exact: true })).toBeVisible();
 });
 
+test("Safety Intelligence separates potential signals from completed actions", async ({ page }) => {
+  await page.goto("/regulatory-updates");
+  await page.getByLabel("Update category filter").selectOption("safety_intelligence");
+
+  await expect(page.getByText("Showing 6 of 14")).toBeVisible();
+  const signalCard = page.getByRole("article").filter({
+    has: page.getByRole("heading", {
+      name: "FDA evaluates a drug-hypersensitivity signal for corticotropin products",
+    }),
+  });
+  await signalCard.getByRole("link", { name: "Review update" }).click();
+
+  await expect(
+    page.getByRole("heading", { name: /Signal, action, and implementation/ }),
+  ).toBeVisible();
+  await expect(page.getByText("under assessment", { exact: true })).toBeVisible();
+  await expect(page.getByText("under evaluation", { exact: true })).toBeVisible();
+  await expect(page.getByText("Drug hypersensitivity", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Acthar Gel, Corticotrophin/)).toBeVisible();
+  await expect(
+    page.getByText("Listing does not establish causality", { exact: false }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /Open official FDA source/ })).toHaveAttribute(
+    "href",
+    "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/january-march-2026-new-safety-information-or-potential-signals-serious-risks-identified-fda-adverse",
+  );
+});
+
 test("Regulatory Updates has no detectable WCAG A/AA axe violations", async ({ page }) => {
   await page.goto("/regulatory-updates");
   const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
@@ -373,5 +401,16 @@ test("captures desktop and mobile review evidence", async ({ page }, testInfo) =
   await page.screenshot({
     path: `artifacts/screenshots/3-2-p-5-${testInfo.project.name}.png`,
     fullPage: true,
+  });
+
+  await page.goto("/regulatory-updates");
+  await page.getByLabel("Update category filter").selectOption("safety_intelligence");
+  await page.locator('section[aria-labelledby="updates-title"]').screenshot({
+    path: `artifacts/screenshots/safety-intelligence-${testInfo.project.name}.png`,
+  });
+
+  await page.goto("/regulatory-updates/fda-aems-corticotropin-hypersensitivity-signal-2026-q1");
+  await page.locator('section[aria-labelledby="safety-state-title"]').screenshot({
+    path: `artifacts/screenshots/safety-signal-detail-${testInfo.project.name}.png`,
   });
 });

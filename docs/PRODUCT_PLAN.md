@@ -104,6 +104,8 @@ Labeling & e-Labeling
 - Cross-module consistency rules
 - Review-record gate
 - Text/CSV export, print, accessibility, responsive behavior
+- Shared `OfficialSource` / `ChecklistItem` controls and review-record validation (Safety release candidate)
+- Six-record FDA/EMA Safety Intelligence filter/detail slice (Safety release candidate)
 
 ## 5. Product area map
 
@@ -345,13 +347,13 @@ Deliverables:
 
 - Home을 `Updates → Application Preparation → CTD` task flow로 재구성 — first guided-search slice implemented locally
 - Top-level information architecture와 navigation — implemented locally
-- Shared `OfficialSource` / `ChecklistItem` / review/version primitives
+- Shared `OfficialSource` / `ChecklistItem` / review/version primitives — implemented locally
 - `Application & Lifecycle Preparation Hub` landing page — transparent coverage routes implemented; source-backed guides pending
 - FDA Initial IND reference guide/checklist
 - EMA Centralised MAA reference guide/checklist
 - Curated Regulatory Updates landing page — 8 source-checked records implemented; indexable and in sitemap
 - FDA/EMA update detail template — 4 FDA and 4 EMA static detail pages implemented
-- Safety Intelligence schema/filter/detail slice — source and acceptance plan documented; 4–6 curated records pending
+- Safety Intelligence schema/filter/detail slice — 6 curated official-source records implemented and locally verified; production pending
 - Methodology source/review/correction explanation
 - Sitemap, RSS baseline, metadata — sitemap/robots/canonical/manifest implemented; RSS pending
 
@@ -580,8 +582,8 @@ user_confidence
 ## 12. Immediate next actions
 
 1. Preserve the qualified-human-review blocker as visible.
-2. Define shared `OfficialSource` and `ChecklistItem` schemas outside UI components.
-3. Run two bounded Release 1 tracks: FDA Initial IND source package/checklist and Safety Intelligence schema plus 4–6 curated source packages.
+2. Complete Safety Intelligence PR, production deployment, and public verification.
+3. Implement the FDA Initial IND source package/checklist as the next bounded Release 1 track.
 4. Prepare EMA Centralised MAA and FDA/EMA post-approval change source packages.
 5. Recruit first 5–10 CMC/RA target practitioners and run task-based usability tests.
 6. Decide whether launch remains a non-commercial prototype or moves toward commercial use; plan an owned domain and appropriate hosting plan before the latter.

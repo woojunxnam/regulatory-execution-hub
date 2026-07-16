@@ -35,6 +35,14 @@ describe("findRegulatoryPathways", () => {
     expect(matches.map(({ pathway }) => pathway.id)).toEqual(["regulatory-updates"]);
   });
 
+  it("routes a drug-safety question to Safety Intelligence", () => {
+    const matches = findRegulatoryPathways("Show FDA AEMS adverse event signals");
+
+    expect(matches[0]?.pathway.id).toBe("safety-intelligence");
+    expect(matches[0]?.pathway.status).toBe("available");
+    expect(matches[0]?.pathway.href).toBe("/regulatory-updates");
+  });
+
   it("returns honest navigation fallbacks for an unmatched question", () => {
     const matches = findRegulatoryPathways("Where should I begin with an unfamiliar task?");
 

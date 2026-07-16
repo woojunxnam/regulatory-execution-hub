@@ -58,7 +58,7 @@ describe("RegulatoryQuery", () => {
     expect(screen.getByRole("button", { name: "Sources for 3.2.P.5" })).toBeVisible();
     expect(screen.getByRole("button", { name: "Quality Overall Summary" })).toBeVisible();
     expect(screen.getByRole("button", { name: "Latest FDA updates" })).toBeVisible();
-    expect(screen.getByRole("button", { name: "Latest EMA updates" })).toBeVisible();
+    expect(screen.getByRole("button", { name: "Safety Intelligence" })).toBeVisible();
     expect(screen.queryByRole("button", { name: /FDA IND/ })).not.toBeInTheDocument();
   });
 });

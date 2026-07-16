@@ -3,26 +3,14 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/ctd/breadcrumbs";
 import { PageIntro } from "@/components/ctd/page-intro";
 import { StatusBadge } from "@/components/ctd/status-badge";
+import { UpdateExplorer } from "@/components/regulatory-updates/update-explorer";
 import { regulatoryUpdates } from "@/data/regulatory-updates/updates";
 
 export const metadata: Metadata = {
   title: "Source-Checked FDA and EMA Regulatory Updates",
   description:
-    "Curated official-source FDA and EMA guidance, procedure, variation, and submission-planning updates with visible status and applicability boundaries.",
+    "Curated official-source FDA and EMA guidance, procedure, submission-planning, and Safety Intelligence updates with visible status and applicability boundaries.",
   alternates: { canonical: "/regulatory-updates" },
-};
-
-const impactLabels = {
-  conditional: "Conditional",
-  potentially_impacted: "Potentially impacted",
-  undetermined: "Undetermined",
-};
-
-const sourceStatusLabels = {
-  final: "Final",
-  draft: "Draft",
-  effective: "Effective",
-  updated: "Updated",
 };
 
 const agencyCounts = regulatoryUpdates.reduce(
@@ -37,7 +25,7 @@ export default function RegulatoryUpdatesPage() {
       <PageIntro
         eyebrow="Regulatory intelligence"
         title="Official update. Visible status. Practical next question."
-        summary="A manually curated first release of FDA and EMA regulatory changes connected to possible preparation impact. Every record exposes its official source, document status, editorial status, applicability boundary, and last-verification date."
+        summary="A manually curated FDA and EMA snapshot connecting guidance, procedures, and Safety Intelligence to possible preparation impact. Every record exposes its official source, document status, editorial status, applicability boundary, and last-verification date."
         aside={
           <div className="border-teal/20 bg-sage rounded-2xl border p-5">
             <StatusBadge tone="teal">{regulatoryUpdates.length} source-checked records</StatusBadge>
@@ -96,70 +84,7 @@ export default function RegulatoryUpdatesPage() {
           </p>
         </div>
 
-        <div className="mt-7 grid gap-4 lg:grid-cols-2">
-          {regulatoryUpdates.map((record) => (
-            <article
-              key={record.slug}
-              className="border-line group flex flex-col rounded-3xl border bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex flex-wrap gap-2">
-                  <StatusBadge tone={record.agency === "FDA" ? "blue" : "teal"}>
-                    {record.agency}
-                  </StatusBadge>
-                  <StatusBadge tone={record.sourceDocumentStatus === "draft" ? "gold" : "neutral"}>
-                    {sourceStatusLabels[record.sourceDocumentStatus]}
-                  </StatusBadge>
-                </div>
-                <time
-                  className="text-muted text-xs font-semibold"
-                  dateTime={record.sourceDate.date}
-                >
-                  {record.sourceDate.date}
-                </time>
-              </div>
-
-              <h3 className="mt-5 font-serif text-2xl leading-tight font-semibold">
-                {record.title}
-              </h3>
-              <p className="text-muted mt-3 text-sm leading-6">{record.summary}</p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                <StatusBadge tone={record.impactClassification === "conditional" ? "blue" : "gold"}>
-                  {impactLabels[record.impactClassification]}
-                </StatusBadge>
-                {record.topics.slice(0, 3).map((topic) => (
-                  <span
-                    key={topic}
-                    className="border-line text-muted rounded-full border px-2.5 py-1 text-xs font-semibold"
-                  >
-                    {topic}
-                  </span>
-                ))}
-              </div>
-
-              {record.commentDeadline ? (
-                <p className="text-rose mt-5 text-xs font-bold">
-                  Official comment deadline:{" "}
-                  <time dateTime={record.commentDeadline}>{record.commentDeadline}</time>
-                </p>
-              ) : null}
-
-              <div className="border-line mt-auto flex flex-wrap items-center justify-between gap-3 border-t pt-5">
-                <p className="text-muted text-xs">
-                  Official source checked {record.lastVerifiedDate}
-                </p>
-                <Link
-                  href={`/regulatory-updates/${record.slug}`}
-                  className="text-teal inline-flex items-center gap-2 text-sm font-bold underline"
-                >
-                  Review update
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+        <UpdateExplorer records={regulatoryUpdates} />
       </section>
 
       <section className="bg-teal-dark mt-12 grid gap-7 rounded-3xl p-7 text-white md:grid-cols-3 md:p-9">

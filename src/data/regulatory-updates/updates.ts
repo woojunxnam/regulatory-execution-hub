@@ -1,4 +1,5 @@
 import { regulatoryUpdateCollectionSchema } from "@/lib/regulatory-updates/schema";
+import { rawSafetyUpdates } from "@/data/regulatory-updates/safety-updates";
 
 const LAST_VERIFIED_DATE = "2026-07-16";
 
@@ -332,7 +333,7 @@ const rawUpdates = [
 ] as const;
 
 export const regulatoryUpdates = regulatoryUpdateCollectionSchema
-  .parse(rawUpdates)
+  .parse([...rawUpdates, ...rawSafetyUpdates])
   .sort(
     (left, right) =>
       right.sourceDate.date.localeCompare(left.sourceDate.date) ||

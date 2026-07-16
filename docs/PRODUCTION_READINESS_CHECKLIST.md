@@ -11,6 +11,7 @@ Last updated: `2026-07-16`
 | Trust/policy/security/SEO layer     | Implemented and verified         |               Yes |
 | Home V2 live-task redesign          | Deployed and production verified |               Yes |
 | Home V3 horizontal-flow redesign    | Deployed and production verified |               Yes |
+| Safety Intelligence MVP             | 6-record local release candidate |                No |
 | Qualified regulatory `ReviewRecord` | Missing                          |                No |
 | Continuous FDA/EMA monitoring       | Not implemented                  |                No |
 | Source-backed IND/MAA checklists    | Not implemented                  |                No |
@@ -63,6 +64,20 @@ Production verification date: `2026-07-16`
 - [x] Confirm no false `human_reviewed`, `reviewer_ready`, or final regulatory claim
 - [x] Confirm representative official-source URLs return HTTP `200`
 
+## 3.1 Safety Intelligence release gate
+
+- [x] Shared regulatory source/checklist controls outside UI components
+- [x] Six curated FDA/EMA records with exact official-source URLs
+- [x] Signal, causality, regulatory outcome, and implementation states separated
+- [x] Explicit affected-document classifications
+- [x] Agency/category filtering and detail template
+- [x] No false causality, incidence, patient advice, or derived deadline claim
+- [x] Local format, lint, type-check, unit, production build, accessibility/route E2E
+- [x] Local Vitest `13 files / 52 tests`, build `41` routes, desktop/mobile E2E `90/90`
+- [x] Review intended diff and exclude `handoff_passon_prompt.md`
+- [ ] Commit, push, PR, GitHub/Vercel checks, merge
+- [ ] Re-run desktop/mobile `90/90` against public production
+
 ## 4. Regulatory governance gate
 
 다음 항목은 stronger trusted beta claim 전에 필요합니다.
@@ -76,7 +91,7 @@ Production verification date: `2026-07-16`
 - [ ] FDA Initial IND checklist acceptance criteria
 - [ ] EMA Centralised MAA checklist acceptance criteria
 - [x] Safety Intelligence source and publication acceptance plan
-- [ ] Safety Intelligence schema validation and 4–6 accepted source packages
+- [x] Safety Intelligence schema validation and 6 source-checked packages
 - [x] Update-record acceptance criteria for first manual snapshot
 - [ ] Qualified review and recurring verification cadence for update records
 
