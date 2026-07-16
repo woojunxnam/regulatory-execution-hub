@@ -31,9 +31,7 @@ describe("RegulatoryQuery", () => {
       "href",
       "/submission-navigator/ctd/module-3/drug-product/3-2-p-5",
     );
-    expect(
-      screen.getByText("Guided navigation only — no generated regulatory advice."),
-    ).toBeVisible();
+    expect(screen.getByText(/Page navigation only — no generated advice/)).toBeVisible();
   });
 
   it("labels unreleased FDA IND support as planned and links only to its roadmap", async () => {

@@ -10,6 +10,7 @@ Last updated: `2026-07-16`
 | Regulatory Updates MVP              | 8 source-checked FDA/EMA records |               Yes |
 | Trust/policy/security/SEO layer     | Implemented and verified         |               Yes |
 | Home V2 live-task redesign          | Deployed and production verified |               Yes |
+| Home V3 horizontal-flow redesign    | Local release candidate          |                No |
 | Qualified regulatory `ReviewRecord` | Missing                          |                No |
 | Continuous FDA/EMA monitoring       | Not implemented                  |                No |
 | Source-backed IND/MAA checklists    | Not implemented                  |                No |
@@ -37,6 +38,21 @@ Production verification date: `2026-07-16`
 - [x] Confirm Vercel production deployment for Home V2 application commit
 - [x] Re-run `88/88` against public production
 
+## 2.1 Home V3 release gate
+
+- [x] Replace split hero with a single vertical task-finder flow
+- [x] Reduce duplicate CTA and explanatory copy
+- [x] Keep finder behavior deterministic and page-navigation only
+- [x] Keep live and planned coverage visibly separate
+- [x] Preserve non-persistence and confidential-data warning
+- [x] Verify desktop/mobile layout, search examples, accessibility, console, routes
+- [x] Local formatting, lint, type-check, unit, production build, E2E `88/88`
+- [ ] Review and commit intended diff without `handoff_passon_prompt.md`
+- [ ] Create PR and confirm GitHub/Vercel checks
+- [ ] Merge to `main` and confirm production deployment
+- [ ] Re-run desktop/mobile `88/88` against the public URL
+- [ ] Record Home V3 production commit and final density metrics
+
 ## 3. Required immediately after deployment
 
 - [ ] Verify `/`, `/regulatory-updates`, `/submission-navigator/ctd`, `/methodology`, `/about`
@@ -59,6 +75,8 @@ Production verification date: `2026-07-16`
 - [ ] Material correction/version history operation
 - [ ] FDA Initial IND checklist acceptance criteria
 - [ ] EMA Centralised MAA checklist acceptance criteria
+- [x] Safety Intelligence source and publication acceptance plan
+- [ ] Safety Intelligence schema validation and 4–6 accepted source packages
 - [x] Update-record acceptance criteria for first manual snapshot
 - [ ] Qualified review and recurring verification cadence for update records
 
@@ -102,4 +120,4 @@ Before spending money or commercial launch, recheck current official Vercel pric
 - Stage B — trusted regulatory beta: Stage A plus qualified ownership/review, maintenance cadence, corrections operation, source-backed application guides.
 - Stage C — commercial workspace: Stage B plus owned domain, suitable hosting plan, legal/privacy/security review, account/data governance, monitoring and support.
 
-Current honest state: **Home V2를 포함한 Stage A technical readiness 완료**. Regulatory governance gate는 계속 open 상태입니다.
+Current honest state: **Home V2를 포함한 Stage A technical readiness 완료, Home V3는 local release candidate**. Regulatory governance gate는 계속 open 상태입니다.
