@@ -7,6 +7,9 @@ import { drugProductSections } from "@/data/ctd/module-3-sections";
 
 export const metadata: Metadata = {
   title: "Module 3 Drug Product",
+  description:
+    "Browse available and planned CTD 3.2.P Drug Product section references and evidence workflows.",
+  alternates: { canonical: "/submission-navigator/ctd/module-3/drug-product" },
 };
 
 export default function DrugProductIndexPage() {

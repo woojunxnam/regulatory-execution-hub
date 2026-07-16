@@ -1,9 +1,10 @@
 import Link from "next/link";
 
 const navigation = [
-  { href: "/submission-navigator/ctd", label: "CTD Builder" },
-  { href: "/submission-navigator/ctd/module-3", label: "Module 3" },
-  { href: "/submission-navigator/ctd/source-matrix", label: "Source Matrix" },
+  { href: "/applications", label: "Applications" },
+  { href: "/lifecycle-changes", label: "Lifecycle Changes" },
+  { href: "/regulatory-updates", label: "Updates" },
+  { href: "/submission-navigator/ctd", label: "CTD Workspace" },
   { href: "/methodology", label: "Methodology" },
 ];
 
@@ -28,7 +29,7 @@ export function SiteHeader() {
           </span>
         </Link>
         <nav aria-label="Primary navigation">
-          <ul className="text-muted flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+          <ul className="text-muted flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold xl:gap-x-5">
             {navigation.map((item) => (
               <li key={item.href}>
                 <Link className="hover:text-teal rounded-sm" href={item.href}>

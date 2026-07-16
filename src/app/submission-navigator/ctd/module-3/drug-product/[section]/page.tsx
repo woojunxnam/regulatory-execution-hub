@@ -24,6 +24,9 @@ export async function generateMetadata({
   return {
     title: `${section.sectionId} ${section.title}`,
     description: `Structured CTD authoring, evidence, consistency, and review preparation for ${section.sectionId}.`,
+    alternates: {
+      canonical: `/submission-navigator/ctd/module-3/drug-product/${section.slug}`,
+    },
   };
 }
 

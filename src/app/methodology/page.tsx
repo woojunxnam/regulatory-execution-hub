@@ -7,6 +7,9 @@ import { controlOfDrugProduct } from "@/data/ctd/sections/3-2-p-5";
 
 export const metadata: Metadata = {
   title: "Methodology & Limitations",
+  description:
+    "Source hierarchy, classification discipline, deterministic readiness, review status, and educational-use limitations.",
+  alternates: { canonical: "/methodology" },
 };
 
 export default function MethodologyPage() {

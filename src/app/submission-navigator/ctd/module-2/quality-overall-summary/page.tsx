@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: "2.3 Quality Overall Summary Traceability",
   description:
     "Trace draft Quality Overall Summary locations to controlled Module 3 evidence and visible consistency checks.",
+  alternates: {
+    canonical: "/submission-navigator/ctd/module-2/quality-overall-summary",
+  },
 };
 
 function traceabilityTone(status: "linked" | "open" | "blocked") {

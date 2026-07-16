@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "CTD Authoring & Dossier Builder",
   description:
     "Trace CTD section intent, source readiness, dependencies, and reviewer preparation.",
+  alternates: { canonical: "/submission-navigator/ctd" },
 };
 
 const modules = [
