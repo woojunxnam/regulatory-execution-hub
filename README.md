@@ -7,11 +7,11 @@ FDA/EMA 규제 업무를 official source에서 실제 preparation task로 연결
 - URL: `https://regulatory-execution-hub.vercel.app`
 - Hosting: Vercel Git integration
 - Production branch: `main`
-- Home V3 application commit: `2bb07a40eb98cdf9fde4a4cc9e6bf2a7ced8f26c`
+- Current application commit: `1668a4f9a19e823ac79b002626a3447c7e141577`
 - Production verification date: `2026-07-16`
-- Production verification: desktop/mobile Playwright `88/88` pass
+- Production verification: desktop/mobile Playwright `90/90` pass
 
-PR #2를 통해 expanded CTD, Regulatory Updates MVP, trust/policy pages, security headers, SEO discovery files가 production에 반영되었습니다. PR #3은 이 foundation 위에서 Home V2를 추가했고, PR #5는 좌우 분할 hero를 제거하고 task finder 중심의 Home V3를 production에 반영했습니다.
+PR #2를 통해 expanded CTD, Regulatory Updates MVP, trust/policy pages, security headers, SEO discovery files가 production에 반영되었습니다. PR #3은 이 foundation 위에서 Home V2를 추가했고, PR #5는 task finder 중심의 Home V3를 반영했습니다. PR #7은 shared regulatory controls와 6-record Safety Intelligence slice를 production에 추가했습니다.
 
 GitHub Pages URL은 application이 아니라 repository `README.md`를 렌더링하므로 production URL로 사용하지 않습니다.
 
@@ -71,7 +71,7 @@ Home V3 local and public-production verification:
 - Home, Regulatory Updates, `3.2.P.5` axe WCAG A/AA detected violation `0`
 - Home density: 약 `210 words`, `3` top-level sections, `1831px` page height at `1280 × 720`
 
-Safety Intelligence release candidate local verification:
+Safety Intelligence production verification:
 
 - Formatting and ESLint zero warnings
 - strict TypeScript
@@ -79,7 +79,7 @@ Safety Intelligence release candidate local verification:
 - Next.js production build `41 static/SSG routes`
 - desktop/mobile Playwright `90/90`
 - Regulatory Updates axe WCAG A/AA detected violation `0`
-- Production deployment: pending PR review and merge
+- PR #7, Vercel production deployment, public URL verification: complete
 
 Production을 재검증하려면 다음 environment variable을 사용합니다.
 

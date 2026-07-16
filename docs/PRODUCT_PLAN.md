@@ -69,9 +69,9 @@ Labeling & e-Labeling
 
 - URL: `https://regulatory-execution-hub.vercel.app`
 - Production branch: `main`
-- Home V3 application commit: `2bb07a40eb98cdf9fde4a4cc9e6bf2a7ced8f26c`
-- PR #2, PR #3, and PR #5 merged; expanded CTD, Regulatory Updates, trust/policy/security/SEO layer, and Home V3 are public
-- Latest verified production suite: desktop/mobile `88/88` pass
+- Current application commit: `1668a4f9a19e823ac79b002626a3447c7e141577`
+- PR #2, PR #3, PR #5, and PR #7 merged; expanded CTD, Regulatory Updates, Safety Intelligence, trust/policy/security/SEO layer, and Home V3 are public
+- Latest verified production suite: desktop/mobile `90/90` pass
 
 ### Home V2 release record
 
@@ -93,6 +93,17 @@ Labeling & e-Labeling
 - Local, CI, and production checks: format/lint/type-check, `11 files / 44 tests`, `35` routes, desktop/mobile `88/88` pass
 - Product boundary: deterministic page navigation only; no generated regulatory answer, persistence, external submission, or confidential-data intake
 
+### Safety Intelligence MVP release record
+
+- Historical branch: `codex/safety-intelligence-mvp`
+- Merged PR: `https://github.com/woojunxnam/regulatory-execution-hub/pull/7`
+- Application commit: `1668a4f9a19e823ac79b002626a3447c7e141577`
+- State: Vercel production deployed and public-URL verified
+- Coverage: 6 curated records from exact FDA/EMA official sources; 14 Regulatory Updates records total
+- Controls: signal, causality, regulatory outcome, source implementation state, affected artifacts, official-source/editorial/verification status
+- Checks: format/lint/type-check, `13 files / 52 tests`, `41` routes, desktop/mobile `90/90` local, CI, and public production pass
+- Product boundary: no continuous monitoring, automatic publication, causality inference, incidence calculation, or patient-specific advice
+
 ### Implemented core
 
 - Six `Module 3 Drug Product` sections
@@ -104,8 +115,8 @@ Labeling & e-Labeling
 - Cross-module consistency rules
 - Review-record gate
 - Text/CSV export, print, accessibility, responsive behavior
-- Shared `OfficialSource` / `ChecklistItem` controls and review-record validation (Safety release candidate)
-- Six-record FDA/EMA Safety Intelligence filter/detail slice (Safety release candidate)
+- Shared `OfficialSource` / `ChecklistItem` controls and review-record validation
+- Six-record FDA/EMA Safety Intelligence filter/detail slice
 
 ## 5. Product area map
 
@@ -351,9 +362,9 @@ Deliverables:
 - `Application & Lifecycle Preparation Hub` landing page — transparent coverage routes implemented; source-backed guides pending
 - FDA Initial IND reference guide/checklist
 - EMA Centralised MAA reference guide/checklist
-- Curated Regulatory Updates landing page — 8 source-checked records implemented; indexable and in sitemap
-- FDA/EMA update detail template — 4 FDA and 4 EMA static detail pages implemented
-- Safety Intelligence schema/filter/detail slice — 6 curated official-source records implemented and locally verified; production pending
+- Curated Regulatory Updates landing page — 14 source-checked records implemented; indexable and in sitemap
+- FDA/EMA update detail template — 6 FDA and 8 EMA static detail pages implemented
+- Safety Intelligence schema/filter/detail slice — 6 curated official-source records implemented and production verified
 - Methodology source/review/correction explanation
 - Sitemap, RSS baseline, metadata — sitemap/robots/canonical/manifest implemented; RSS pending
 
@@ -582,9 +593,8 @@ user_confidence
 ## 12. Immediate next actions
 
 1. Preserve the qualified-human-review blocker as visible.
-2. Complete Safety Intelligence PR, production deployment, and public verification.
-3. Implement the FDA Initial IND source package/checklist as the next bounded Release 1 track.
-4. Prepare EMA Centralised MAA and FDA/EMA post-approval change source packages.
-5. Recruit first 5–10 CMC/RA target practitioners and run task-based usability tests.
-6. Decide whether launch remains a non-commercial prototype or moves toward commercial use; plan an owned domain and appropriate hosting plan before the latter.
-7. Add monitoring automation only after source cadence, editorial review, superseded handling, and correction ownership are defined.
+2. Implement the FDA Initial IND source package/checklist as the next bounded Release 1 track.
+3. Prepare EMA Centralised MAA and FDA/EMA post-approval change source packages.
+4. Recruit first 5–10 CMC/RA target practitioners and run task-based usability tests.
+5. Decide whether launch remains a non-commercial prototype or moves toward commercial use; plan an owned domain and appropriate hosting plan before the latter.
+6. Add monitoring automation only after source cadence, editorial review, superseded handling, and correction ownership are defined.

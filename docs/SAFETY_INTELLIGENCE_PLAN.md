@@ -107,7 +107,7 @@ qualified_review_record: null
 9. Patient treatment advice 또는 stop/start recommendation을 생성하지 않는다.
 10. Superseded, withdrawn, archived, or completed state를 추적할 version history가 있다.
 
-## First curated slice — implemented locally
+## First curated slice — production verified
 
 6개의 official-source record로 filter와 detail template을 검증했다. 모든 record는 `last_verified_date: 2026-07-16`, `editorial_review_status: source_checked`, `qualified_review_record: null`을 유지한다.
 
