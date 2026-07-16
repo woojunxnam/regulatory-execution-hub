@@ -7,13 +7,11 @@ FDA/EMA 규제 업무를 official source에서 실제 preparation task로 연결
 - URL: `https://regulatory-execution-hub.vercel.app`
 - Hosting: Vercel Git integration
 - Production branch: `main`
-- Home V2 application commit: `ac6c3ad576edddf2e54819bc42477a540dfb9dd2`
+- Home V3 application commit: `2bb07a40eb98cdf9fde4a4cc9e6bf2a7ced8f26c`
 - Production verification date: `2026-07-16`
 - Production verification: desktop/mobile Playwright `88/88` pass
 
-PR #2를 통해 expanded CTD, Regulatory Updates MVP, trust/policy pages, security headers, SEO discovery files가 production에 반영되었습니다. PR #3은 이 foundation 위에서 첫 화면을 live task 중심으로 단순화한 Home V2를 production에 반영했습니다.
-
-현재 Home V3 release candidate는 좌우 분할 hero를 제거하고 task finder를 중심으로 세로 배치했습니다. 첫 화면 문구와 중복 CTA를 줄였으며, local desktop/mobile `88/88` 검증을 통과했습니다. `main` merge와 public URL 재검증 전까지 production truth는 위 Home V2 기록을 유지합니다.
+PR #2를 통해 expanded CTD, Regulatory Updates MVP, trust/policy pages, security headers, SEO discovery files가 production에 반영되었습니다. PR #3은 이 foundation 위에서 Home V2를 추가했고, PR #5는 좌우 분할 hero를 제거하고 task finder 중심의 Home V3를 production에 반영했습니다.
 
 GitHub Pages URL은 application이 아니라 repository `README.md`를 렌더링하므로 production URL로 사용하지 않습니다.
 
@@ -27,7 +25,7 @@ GitHub Pages URL은 application이 아니라 repository `README.md`를 렌더링
 - content/source history와 content version·source-set hash에 고정된 `ReviewRecord` gate
 - `/about`, `/editorial-policy`, `/privacy`, `/corrections`, canonical metadata, `robots.txt`, `sitemap.xml`, web manifest, security headers
 - Home V2: live-task navigation, single-line deterministic page finder, latest 3 updates, compact roadmap, mobile menu
-- Home V3 release candidate: centered horizontal-flow hero, dominant task finder, compact live/planned coverage, reduced Home density
+- Home V3: centered horizontal-flow hero, dominant task finder, compact live/planned coverage, reduced Home density
 
 모든 CTD sample synthesis는 `source_verification_required` 상태입니다. 실제 qualified review evidence가 없으므로 `human_reviewed` 또는 `reviewer_ready`로 표시하지 않습니다. Update record는 `source_checked`이며 qualified regulatory review를 의미하지 않습니다.
 
@@ -61,7 +59,7 @@ npm run build
 npm run test:e2e
 ```
 
-Current Home V3 local release-candidate verification:
+Home V3 local and public-production verification:
 
 - Formatting and ESLint zero warnings
 - strict TypeScript
