@@ -269,7 +269,8 @@ export const controlOfDrugProduct = ctdSectionSchema.parse({
       comparedLocations: ["3.2.P.5.1", "3.2.P.5.2", "3.2.P.8.3"],
       severity: "high",
       status: "unable_to_compare",
-      rationale: "The 3.2.P.8 reference section is not part of this vertical slice.",
+      rationale:
+        "The 3.2.P.8 section is available, but the controlled stability source-data reconciliation is not complete.",
     },
     {
       id: "check-impurities",
@@ -308,6 +309,14 @@ export const controlOfDrugProduct = ctdSectionSchema.parse({
       lastVerifiedDate: "2026-07-13",
       editorialReviewStatus: "source_checked",
       note: "Current structure used by this prototype; source wording is summarized, not reproduced.",
+      versionHistory: [
+        {
+          versionLabel: "M4Q(R1)",
+          sourceStatus: "final",
+          verifiedDate: "2026-07-13",
+          note: "Current source version used for the section structure.",
+        },
+      ],
     },
     {
       id: "ich-m4q-qa",
@@ -319,6 +328,14 @@ export const controlOfDrugProduct = ctdSectionSchema.parse({
       lastVerifiedDate: "2026-07-13",
       editorialReviewStatus: "source_checked",
       note: "Used for section-placement and cross-reference clarifications.",
+      versionHistory: [
+        {
+          versionLabel: "M4Q(R1) Questions & Answers",
+          sourceStatus: "final",
+          verifiedDate: "2026-07-13",
+          note: "Current source version used for location clarifications.",
+        },
+      ],
     },
     {
       id: "ema-m4q-step5",
@@ -333,6 +350,14 @@ export const controlOfDrugProduct = ctdSectionSchema.parse({
       lastVerifiedDate: "2026-07-13",
       editorialReviewStatus: "source_checked",
       note: "EMA status context; applicants must also consult applicable ICH and regional guidance.",
+      versionHistory: [
+        {
+          versionLabel: "EMA Step 5 page snapshot 2026-07-13",
+          sourceStatus: "effective",
+          verifiedDate: "2026-07-13",
+          note: "Web source state recorded at the last source check.",
+        },
+      ],
     },
     {
       id: "fda-ectd",
@@ -345,6 +370,14 @@ export const controlOfDrugProduct = ctdSectionSchema.parse({
       lastVerifiedDate: "2026-07-13",
       editorialReviewStatus: "source_checked",
       note: "Technical submission-format context; not used to infer product-specific P.5 evidence requirements.",
+      versionHistory: [
+        {
+          versionLabel: "FDA eCTD page snapshot 2026-07-13",
+          sourceStatus: "effective",
+          verifiedDate: "2026-07-13",
+          note: "Web source state recorded at the last source check.",
+        },
+      ],
     },
     {
       id: "fda-m4q-r2-draft",
@@ -357,12 +390,36 @@ export const controlOfDrugProduct = ctdSectionSchema.parse({
       lastVerifiedDate: "2026-07-13",
       editorialReviewStatus: "source_checked",
       note: "Future-readiness reference only; FDA labels the draft not for implementation.",
+      versionHistory: [
+        {
+          versionLabel: "FDA draft guidance page snapshot 2026-07-13",
+          sourceStatus: "draft",
+          verifiedDate: "2026-07-13",
+          note: "Draft status recorded separately from current M4Q(R1) implementation content.",
+        },
+      ],
     },
   ],
   sourceStatus: "draft",
   lastVerifiedDate: "2026-07-13",
   contentVersion: "0.1.0",
   editorialReviewStatus: "source_verification_required",
+  reviewRecords: [],
+  contentHistory: [
+    {
+      version: "0.1.0",
+      date: "2026-07-13",
+      changeSummary: "Initial 3.2.P.5 editorial reference implementation.",
+      editorialReviewStatus: "source_verification_required",
+      sourceCitationIds: [
+        "ich-m4q-r1",
+        "ich-m4q-qa",
+        "ema-m4q-step5",
+        "fda-ectd",
+        "fda-m4q-r2-draft",
+      ],
+    },
+  ],
   readinessContext: {
     ownersAssigned: true,
     keyDecisionsStable: true,

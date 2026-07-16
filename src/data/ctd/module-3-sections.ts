@@ -11,19 +11,22 @@ export const drugProductSections: ModuleSectionSummary[] = [
     sectionId: "3.2.P.1",
     title: "Description and Composition",
     description: "Drug product description and component composition.",
-    status: "planned",
+    status: "available",
+    href: "/submission-navigator/ctd/module-3/drug-product/3-2-p-1",
   },
   {
     sectionId: "3.2.P.2",
     title: "Pharmaceutical Development",
     description: "Development rationale and product/process understanding.",
-    status: "planned",
+    status: "available",
+    href: "/submission-navigator/ctd/module-3/drug-product/3-2-p-2",
   },
   {
     sectionId: "3.2.P.3",
     title: "Manufacture",
     description: "Manufacturers, batch formula, process, controls, and validation.",
-    status: "planned",
+    status: "available",
+    href: "/submission-navigator/ctd/module-3/drug-product/3-2-p-3",
   },
   {
     sectionId: "3.2.P.4",
@@ -49,13 +52,15 @@ export const drugProductSections: ModuleSectionSummary[] = [
     sectionId: "3.2.P.7",
     title: "Container-Closure System",
     description: "Packaging components, materials, specifications, and suitability links.",
-    status: "planned",
+    status: "available",
+    href: "/submission-navigator/ctd/module-3/drug-product/3-2-p-7",
   },
   {
     sectionId: "3.2.P.8",
     title: "Stability",
     description: "Stability conclusions, protocol/commitment, and supporting data.",
-    status: "planned",
+    status: "available",
+    href: "/submission-navigator/ctd/module-3/drug-product/3-2-p-8",
   },
 ];
 

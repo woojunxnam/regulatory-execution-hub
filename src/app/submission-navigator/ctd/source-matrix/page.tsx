@@ -6,6 +6,9 @@ import { sourceMatrix } from "@/data/ctd/source-matrix";
 
 export const metadata: Metadata = {
   title: "Source-to-CTD Matrix",
+  description:
+    "Trace non-confidential demonstration source records to CTD destinations, status, ownership, and open evidence gaps.",
+  alternates: { canonical: "/submission-navigator/ctd/source-matrix" },
 };
 
 export default function SourceMatrixPage() {

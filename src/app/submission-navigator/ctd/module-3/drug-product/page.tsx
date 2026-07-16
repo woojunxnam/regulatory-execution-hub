@@ -7,6 +7,9 @@ import { drugProductSections } from "@/data/ctd/module-3-sections";
 
 export const metadata: Metadata = {
   title: "Module 3 Drug Product",
+  description:
+    "Browse available and planned CTD 3.2.P Drug Product section references and evidence workflows.",
+  alternates: { canonical: "/submission-navigator/ctd/module-3/drug-product" },
 };
 
 export default function DrugProductIndexPage() {
@@ -22,7 +25,7 @@ export default function DrugProductIndexPage() {
       <PageIntro
         eyebrow="3.2.P"
         title="Drug Product section index"
-        summary="A future-compatible section map for drug product composition, development, manufacture, control, packaging, and stability. Only 3.2.P.5 is fully implemented in this slice."
+        summary="A structured editorial foundation for drug product composition, development, manufacture, control, packaging, and stability. Six sections expose traceable sources, deterministic readiness, version history, and explicit review gates."
       />
       <section aria-labelledby="sections-title">
         <h2 id="sections-title" className="sr-only">

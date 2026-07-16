@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { controlOfDrugProduct } from "@/data/ctd/sections/3-2-p-5";
+import { calculateSourceSetHash } from "@/lib/ctd/integrity";
 import { evaluateAuthoringReadiness } from "@/lib/ctd/readiness";
-import type { CtdSection } from "@/lib/ctd/schema";
+import { ctdSectionSchema, type CtdSection } from "@/lib/ctd/schema";
 
 function completeDemonstrationSection(): CtdSection {
   const section = structuredClone(controlOfDrugProduct);
@@ -33,6 +34,28 @@ function completeDemonstrationSection(): CtdSection {
       resolved: true,
     })),
   };
+  section.editorialReviewStatus = "human_reviewed";
+  section.contentHistory = section.contentHistory.map((record) =>
+    record.version === section.contentVersion
+      ? { ...record, editorialReviewStatus: "human_reviewed" as const }
+      : record,
+  );
+  section.reviewer = "Synthetic qualified-review fixture";
+  section.reviewRecords = [
+    {
+      id: "review-fixture-approved",
+      entityType: "ctd_section",
+      entityId: section.sectionId,
+      reviewer: "Synthetic qualified-review fixture",
+      reviewerRole: "Regulatory reviewer fixture",
+      reviewerQualifications: "Test-only qualification fixture; never published as live review",
+      reviewDate: "2026-07-15",
+      result: "approved",
+      notes: "Synthetic approved record used only to exercise the deterministic readiness branch.",
+      contentVersion: section.contentVersion,
+      sourceSetHash: calculateSourceSetHash(section.officialSources),
+    },
+  ];
   return section;
 }
 
@@ -68,9 +91,22 @@ describe("evaluateAuthoringReadiness", () => {
     expect(result.blockers.join(" ")).toContain("Critical discrepancy is unresolved");
   });
 
-  it("reaches reviewer_ready for a complete demonstration case", () => {
-    const result = evaluateAuthoringReadiness(completeDemonstrationSection());
+  it("blocks reviewer_ready when a critical comparison cannot be performed", () => {
+    const section = completeDemonstrationSection();
+    section.consistencyChecks[0].status = "unable_to_compare";
+    section.consistencyChecks[0].severity = "critical";
 
+    const result = evaluateAuthoringReadiness(section);
+
+    expect(result.state).toBe("ready_for_final_authoring");
+    expect(result.blockers.join(" ")).toContain("Critical discrepancy is unable to compare");
+  });
+
+  it("reaches reviewer_ready for a complete demonstration case", () => {
+    const section = completeDemonstrationSection();
+    const result = evaluateAuthoringReadiness(section);
+
+    expect(ctdSectionSchema.safeParse(section).success).toBe(true);
     expect(result.state).toBe("reviewer_ready");
     expect(result.blockers).toEqual([]);
   });
@@ -78,11 +114,25 @@ describe("evaluateAuthoringReadiness", () => {
   it("blocks reviewer_ready when official citations are missing", () => {
     const section = completeDemonstrationSection();
     section.officialSources = [];
+    section.reviewRecords = [];
 
     const result = evaluateAuthoringReadiness(section);
 
     expect(result.state).toBe("ready_for_final_authoring");
     expect(result.blockers).toContain("No official citations are recorded.");
+  });
+
+  it("blocks reviewer_ready without a matching qualified review record", () => {
+    const section = completeDemonstrationSection();
+    section.reviewRecords = [];
+    section.editorialReviewStatus = "source_verification_required";
+
+    const result = evaluateAuthoringReadiness(section);
+
+    expect(result.state).toBe("ready_for_final_authoring");
+    expect(result.blockers).toContain(
+      "No approved qualified review record matches the current content version and source set.",
+    );
   });
 
   it("keeps the page demonstration at initial-drafting readiness", () => {

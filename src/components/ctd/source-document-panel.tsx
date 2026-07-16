@@ -20,7 +20,13 @@ function sourceTone(status: SourceApprovalStatus) {
   return "neutral" as const;
 }
 
-export function SourceDocumentPanel({ sources }: { sources: SourceDocumentRequirement[] }) {
+export function SourceDocumentPanel({
+  sources,
+  sectionId = "3.2.P.5",
+}: {
+  sources: SourceDocumentRequirement[];
+  sectionId?: string;
+}) {
   const [filter, setFilter] = useState<"all" | SourceApprovalStatus>("all");
   const filtered = useMemo(
     () =>
@@ -63,7 +69,7 @@ export function SourceDocumentPanel({ sources }: { sources: SourceDocumentRequir
       </p>
       <div className="border-line overflow-x-auto rounded-xl border">
         <table className="data-table">
-          <caption className="sr-only">Source documents supporting CTD section 3.2.P.5</caption>
+          <caption className="sr-only">Source documents supporting CTD section {sectionId}</caption>
           <thead>
             <tr>
               <th scope="col">Source document</th>

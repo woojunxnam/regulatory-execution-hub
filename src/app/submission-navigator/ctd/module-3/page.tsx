@@ -7,6 +7,9 @@ import { moduleThreeGroups } from "@/data/ctd/module-3-sections";
 
 export const metadata: Metadata = {
   title: "Module 3 Quality",
+  description:
+    "Navigate the CTD Module 3 Quality structure and the available Drug Product evidence foundation.",
+  alternates: { canonical: "/submission-navigator/ctd/module-3" },
 };
 
 export default function ModuleThreePage() {
