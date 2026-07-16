@@ -4,18 +4,18 @@ Last updated: `2026-07-16`
 
 ## 현재 단계
 
-PR #2의 Phase 2 hardening과 Regulatory Updates MVP, PR #3의 Home V2가 `main` production에 반영되었습니다. 현재 production release는 live Regulatory Updates와 CTD task를 우선하고, application/lifecycle guide는 source-backed workflow가 준비될 때까지 planned로 유지합니다.
+PR #2의 Phase 2 hardening과 Regulatory Updates MVP, PR #3의 Home V2, PR #5의 Home V3가 `main` production에 반영되었습니다. 현재 production release는 live Regulatory Updates와 CTD task를 우선하고, application/lifecycle guide는 source-backed workflow가 준비될 때까지 planned로 유지합니다.
 
-기술적 Stage A public prototype gate는 충족할 수 있지만, qualified human review가 없으므로 regulatory content를 `human_reviewed` 또는 `reviewer_ready`로 상향하지 않습니다. 이 governance blocker는 Home V2 deployment와 별개로 유지됩니다.
+기술적 Stage A public prototype gate는 충족할 수 있지만, qualified human review가 없으므로 regulatory content를 `human_reviewed` 또는 `reviewer_ready`로 상향하지 않습니다. 이 governance blocker는 Home V3 deployment와 별개로 유지됩니다.
 
-Home V3는 local release candidate 상태입니다. 세로형 LLM-style entry와 더 짧은 copy를 구현했지만, 생성형 regulatory answer를 제공하지 않고 deterministic page navigation boundary를 유지합니다.
+Home V3는 세로형 LLM-style entry와 더 짧은 copy를 production에 반영했지만, 생성형 regulatory answer를 제공하지 않고 deterministic page navigation boundary를 유지합니다.
 
 ## Public production truth
 
 - URL: `https://regulatory-execution-hub.vercel.app`
 - Production branch: `main`
-- Home V2 application commit: `ac6c3ad576edddf2e54819bc42477a540dfb9dd2`
-- Merged PRs: `#2`, `#3`
+- Home V3 application commit: `2bb07a40eb98cdf9fde4a4cc9e6bf2a7ced8f26c`
+- Merged PRs: `#2`, `#3`, `#5`
 - Production verification: desktop/mobile Playwright `88/88` pass
 - Public routes: `35` static/SSG routes
 
@@ -40,16 +40,16 @@ Home V3는 local release candidate 상태입니다. 세로형 LLM-style entry와
 - mobile menu와 mobile-first ordering 적용
 - Home density: 약 `652 → 330 words`, top-level section `5 → 3`, page height 약 `3996 → 2317px` at `1280 × 720`
 
-## Home V3 local release candidate
+## Home V3 production release
 
 - 좌우 분할 hero를 제거하고 headline → task finder → live/planned coverage 순서의 단일 세로 flow로 재구성
 - 중복 CTA와 설명을 제거하고 Home을 약 `330 → 210 words`, `2317 → 1831px`로 축소 at `1280 × 720`
 - search input과 example query를 첫 hero 안에 유지하고 available/planned result를 계속 분리
 - external LLM answer, query persistence, confidential-data collection을 추가하지 않음
 - desktop/mobile layout, keyboard/search behavior, accessibility, route, console checks 통과
-- production 상태는 PR merge와 public URL `88/88` 재검증 뒤 별도 기록
+- PR #5, Vercel production deployment, public URL desktop/mobile `88/88` 재검증 완료
 
-## 최신 local validation
+## 최신 local and production validation
 
 - Formatting: pass
 - ESLint zero warnings: pass
