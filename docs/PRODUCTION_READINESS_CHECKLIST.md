@@ -4,20 +4,20 @@ Last updated: `2026-07-16`
 
 ## 1. Current production truth
 
-| Area                                | State                            | Public production |
-| ----------------------------------- | -------------------------------- | ----------------: |
-| CTD Quality foundation              | Implemented and verified         |               Yes |
-| Regulatory Updates MVP              | 8 source-checked FDA/EMA records |               Yes |
-| Trust/policy/security/SEO layer     | Implemented and verified         |               Yes |
-| Home V2 live-task redesign          | Deployed and production verified |               Yes |
-| Home V3 horizontal-flow redesign    | Deployed and production verified |               Yes |
-| Safety Intelligence MVP             | 6-record local release candidate |                No |
-| Qualified regulatory `ReviewRecord` | Missing                          |                No |
-| Continuous FDA/EMA monitoring       | Not implemented                  |                No |
-| Source-backed IND/MAA checklists    | Not implemented                  |                No |
+| Area                                | State                             | Public production |
+| ----------------------------------- | --------------------------------- | ----------------: |
+| CTD Quality foundation              | Implemented and verified          |               Yes |
+| Regulatory Updates MVP              | 14 source-checked FDA/EMA records |               Yes |
+| Trust/policy/security/SEO layer     | Implemented and verified          |               Yes |
+| Home V2 live-task redesign          | Deployed and production verified  |               Yes |
+| Home V3 horizontal-flow redesign    | Deployed and production verified  |               Yes |
+| Safety Intelligence MVP             | 6 records, production verified    |               Yes |
+| Qualified regulatory `ReviewRecord` | Missing                           |                No |
+| Continuous FDA/EMA monitoring       | Not implemented                   |                No |
+| Source-backed IND/MAA checklists    | Not implemented                   |                No |
 
 Production URL: `https://regulatory-execution-hub.vercel.app`  
-Home V3 application commit: `2bb07a40eb98cdf9fde4a4cc9e6bf2a7ced8f26c`  
+Current application commit: `1668a4f9a19e823ac79b002626a3447c7e141577`  
 Production verification date: `2026-07-16`
 
 ## 2. Home V2 release gate
@@ -75,8 +75,8 @@ Production verification date: `2026-07-16`
 - [x] Local format, lint, type-check, unit, production build, accessibility/route E2E
 - [x] Local Vitest `13 files / 52 tests`, build `41` routes, desktop/mobile E2E `90/90`
 - [x] Review intended diff and exclude `handoff_passon_prompt.md`
-- [ ] Commit, push, PR, GitHub/Vercel checks, merge
-- [ ] Re-run desktop/mobile `90/90` against public production
+- [x] Commit, push, PR #7, GitHub/Vercel checks, merge
+- [x] Re-run desktop/mobile `90/90` against public production
 
 ## 4. Regulatory governance gate
 
@@ -135,4 +135,4 @@ Before spending money or commercial launch, recheck current official Vercel pric
 - Stage B — trusted regulatory beta: Stage A plus qualified ownership/review, maintenance cadence, corrections operation, source-backed application guides.
 - Stage C — commercial workspace: Stage B plus owned domain, suitable hosting plan, legal/privacy/security review, account/data governance, monitoring and support.
 
-Current honest state: **Home V3를 포함한 Stage A technical readiness와 public production verification 완료**. Regulatory governance gate는 계속 open 상태입니다.
+Current honest state: **Home V3와 Safety Intelligence MVP를 포함한 Stage A technical readiness와 public production verification 완료**. Regulatory governance gate는 계속 open 상태입니다.
