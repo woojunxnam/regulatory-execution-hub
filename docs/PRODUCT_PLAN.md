@@ -3,7 +3,7 @@
 **Status:** Active planning document  
 **Last updated:** 2026-07-16  
 **Scope:** FDA/EMA/EU human medicinal products  
-**Current branch:** `codex/deployment-phase2-hardening`
+**Current branch:** `codex/home-v3-horizontal`
 
 ## 1. 문서 역할과 우선순위
 
@@ -82,6 +82,15 @@ Labeling & e-Labeling
 - Qualified regulatory `ReviewRecord`: 없음
 - Home V2 reduces the Home from about `652` to `330` words, from `5` to `3` top-level sections, and prioritizes live Updates/CTD tasks plus a deterministic page finder.
 - Domain decision: use the existing `.vercel.app` URL only for a non-commercial public prototype; choose an owned custom domain and intended-use hosting plan before a commercial launch.
+
+### Home V3 release candidate
+
+- Current branch: `codex/home-v3-horizontal`
+- State: local implementation and verification complete; review, merge, Vercel deployment, and public verification pending
+- Layout: single vertical headline → task finder → compact live/planned coverage flow
+- Density at `1280 × 720`: about `210 words`, `3` top-level sections, `1831px` page height
+- Local checks: format/lint/type-check, `11 files / 44 tests`, `35` routes, desktop/mobile `88/88` pass
+- Product boundary: deterministic page navigation only; no generated regulatory answer, persistence, external submission, or confidential-data intake
 
 ### Implemented core
 
@@ -314,19 +323,22 @@ Exit criteria:
 
 ### Release 1 — Execution Hub foundation
 
-Implementation note — Home V2, 2026-07-16:
+Implementation note — Home V3, 2026-07-16:
 
-- Home의 첫 화면을 `Find what to prepare`와 `Find a page by task` 중심으로 단순화했다.
+- Home을 좌우 2분할에서 `short headline → full-width page finder → compact live workspaces`의 세로 flow로 단순화했다.
+- Headline은 `What do you need to prepare?`로 축소하고 중복 hero CTA와 긴 설명을 제거했다.
 - 질문은 browser 안에서만 deterministic keyword/intent matching으로 처리하며 저장하거나 external LLM에 전송하지 않는다.
 - Primary navigation에는 현재 live인 `Regulatory Updates / CTD Builder / Trust & Sources / About`만 둔다.
 - Available CTD/QOS/source/update route를 직접 연결하고, 미출시 application/lifecycle work는 compact `Coming next` 또는 planned search result로 표시한다.
 - Home에 latest 3 source-checked update record를 직접 노출한다.
+- `Safety Intelligence`를 `Regulatory Updates` 안의 P1 category로 채택했다. Raw adverse-event news와 automatic causality 판단은 제외한다.
 - `/applications`, `/lifecycle-changes`, `/regulatory-updates` route를 추가했다. Source-backed guide가 없는 lifecycle route는 `noindex`이며 sitemap에서 제외한다. Updates route는 8개 source-checked record와 detail pages를 제공하므로 indexable하고 sitemap에 포함된다.
 - Canonical metadata, `robots.txt`, `sitemap.xml`, web manifest, WebSite JSON-LD와 custom-domain-ready `NEXT_PUBLIC_SITE_URL`을 추가했다.
 - 이는 navigation layer이지 regulatory answer generation이 아니다. Source-backed RAG/LLM answer는 source coverage, citation contract, evaluation set, qualified review gate가 준비될 때까지 deferred 상태다.
 - Latest local verification: format, lint, type-check, 11 unit files/44 tests, production build 35 routes, desktop/mobile E2E 88/88 tests, Home, Updates, and 3.2.P.5 WCAG A/AA axe scans pass.
 - Home V2 density measurement: about 330 words, 3 top-level sections, 2317px page height at 1280 × 720.
 - Home V2는 PR #3 merge 후 Vercel production과 public `88/88` suite로 재검증했다.
+- Home V3 production verification은 current release branch의 review/merge 후 기록한다.
 
 Deliverables:
 
@@ -338,6 +350,7 @@ Deliverables:
 - EMA Centralised MAA reference guide/checklist
 - Curated Regulatory Updates landing page — 8 source-checked records implemented; indexable and in sitemap
 - FDA/EMA update detail template — 4 FDA and 4 EMA static detail pages implemented
+- Safety Intelligence schema/filter/detail slice — source and acceptance plan documented; 4–6 curated records pending
 - Methodology source/review/correction explanation
 - Sitemap, RSS baseline, metadata — sitemap/robots/canonical/manifest implemented; RSS pending
 
@@ -566,9 +579,10 @@ user_confidence
 ## 12. Immediate next actions
 
 1. Preserve the qualified-human-review blocker as visible.
-2. Define shared `OfficialSource` and `ChecklistItem` schemas outside UI components.
-3. Freeze FDA Initial IND source package and checklist acceptance criteria; implement it as the first application guide.
-4. Prepare EMA Centralised MAA and FDA/EMA post-approval change source packages.
-5. Recruit first 5–10 CMC/RA target practitioners and run task-based usability tests.
-6. Decide whether launch remains a non-commercial prototype or moves toward commercial use; plan an owned domain and appropriate hosting plan before the latter.
-7. Add monitoring automation only after source cadence, editorial review, superseded handling, and correction ownership are defined.
+2. Review, merge, and production-verify Home V3.
+3. Define shared `OfficialSource` and `ChecklistItem` schemas outside UI components.
+4. Run two bounded Release 1 tracks: FDA Initial IND source package/checklist and Safety Intelligence schema plus 4–6 curated source packages.
+5. Prepare EMA Centralised MAA and FDA/EMA post-approval change source packages.
+6. Recruit first 5–10 CMC/RA target practitioners and run task-based usability tests.
+7. Decide whether launch remains a non-commercial prototype or moves toward commercial use; plan an owned domain and appropriate hosting plan before the latter.
+8. Add monitoring automation only after source cadence, editorial review, superseded handling, and correction ownership are defined.

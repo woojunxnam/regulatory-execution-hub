@@ -4,7 +4,7 @@ import { expect, test } from "@playwright/test";
 const routes = [
   {
     path: "/",
-    heading: "Find what to prepare — traced to official FDA and EMA sources.",
+    heading: "What do you need to prepare?",
   },
   { path: "/about", heading: "What this product is — and is not." },
   { path: "/applications", heading: "Prepare the application, not only the dossier." },
@@ -123,9 +123,7 @@ test("Home guided search separates available and planned coverage", async ({ pag
   await page.getByRole("button", { name: "Find a page" }).click();
 
   await expect(page.getByRole("link", { name: /3.2.P.5 Control of Drug Product/ })).toBeVisible();
-  await expect(
-    page.getByText("Guided navigation only — no generated regulatory advice."),
-  ).toBeVisible();
+  await expect(page.getByText(/Page navigation only — no generated advice/)).toBeVisible();
 
   await query.fill("FDA IND");
   await page.getByRole("button", { name: "Find a page" }).click();
@@ -168,8 +166,8 @@ test("Home navigation prioritizes live tasks and keeps planned work compact", as
     primaryNavigation.getByRole("link", { name: "Trust & Sources", exact: true }),
   ).toBeVisible();
   await expect(primaryNavigation.getByRole("link", { name: "About", exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Choose a live task." })).toBeVisible();
-  await expect(page.getByText("Submission Guides · Post-Approval Changes")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Open a live workspace." })).toBeVisible();
+  await expect(page.getByText("Application Guides · Lifecycle Changes")).toBeVisible();
 });
 
 test("SEO endpoints expose indexable routes and protect planned thin pages", async ({

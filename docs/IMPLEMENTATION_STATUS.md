@@ -8,6 +8,8 @@ PR #2의 Phase 2 hardening과 Regulatory Updates MVP, PR #3의 Home V2가 `main`
 
 기술적 Stage A public prototype gate는 충족할 수 있지만, qualified human review가 없으므로 regulatory content를 `human_reviewed` 또는 `reviewer_ready`로 상향하지 않습니다. 이 governance blocker는 Home V2 deployment와 별개로 유지됩니다.
 
+Home V3는 local release candidate 상태입니다. 세로형 LLM-style entry와 더 짧은 copy를 구현했지만, 생성형 regulatory answer를 제공하지 않고 deterministic page navigation boundary를 유지합니다.
+
 ## Public production truth
 
 - URL: `https://regulatory-execution-hub.vercel.app`
@@ -38,6 +40,15 @@ PR #2의 Phase 2 hardening과 Regulatory Updates MVP, PR #3의 Home V2가 `main`
 - mobile menu와 mobile-first ordering 적용
 - Home density: 약 `652 → 330 words`, top-level section `5 → 3`, page height 약 `3996 → 2317px` at `1280 × 720`
 
+## Home V3 local release candidate
+
+- 좌우 분할 hero를 제거하고 headline → task finder → live/planned coverage 순서의 단일 세로 flow로 재구성
+- 중복 CTA와 설명을 제거하고 Home을 약 `330 → 210 words`, `2317 → 1831px`로 축소 at `1280 × 720`
+- search input과 example query를 첫 hero 안에 유지하고 available/planned result를 계속 분리
+- external LLM answer, query persistence, confidential-data collection을 추가하지 않음
+- desktop/mobile layout, keyboard/search behavior, accessibility, route, console checks 통과
+- production 상태는 PR merge와 public URL `88/88` 재검증 뒤 별도 기록
+
 ## 최신 local validation
 
 - Formatting: pass
@@ -55,6 +66,7 @@ PR #2의 Phase 2 hardening과 Regulatory Updates MVP, PR #3의 Home V2가 `main`
 | ---------------------------- | ----------------------------- | ----------------------------------------------- | ---------------- |
 | CTD sources                  | official/source checked       | sample synthesis `source_verification_required` | 없음             |
 | Regulatory Updates           | official/source checked       | `source_checked`                                | 없음             |
+| Safety Intelligence          | source families checked       | schema/source plan only                         | 없음             |
 | Application/lifecycle guides | 아직 source-backed guide 없음 | planned                                         | 없음             |
 
 Update의 `Official source checked`는 official page와 metadata를 확인했다는 뜻이며, regulatory impact conclusion이 qualified human review를 받았다는 뜻이 아닙니다.
@@ -65,13 +77,14 @@ Update의 `Official source checked`는 official page와 metadata를 확인했다
 - confidential product/patient/dossier data 수집 없음
 - readiness는 demonstration workflow state이며 agency completeness 또는 filing acceptability가 아님
 - continuous source monitoring과 automatic publication 없음
+- Safety Intelligence는 schema와 source boundary만 확정됐으며 published record 없음
 - FDA Initial IND, EMA Centralised MAA, post-approval change source-backed checklist 없음
 - actual qualified `ReviewRecord` 없음
 
 ## 다음 작업
 
 1. Shared `OfficialSource`와 `ChecklistItem` schema를 확정합니다.
-2. FDA Initial IND source package와 checklist acceptance criteria를 먼저 구현합니다.
+2. FDA Initial IND source package/checklist와 Safety Intelligence schema/4–6 curated source packages를 bounded track으로 구현합니다.
 3. Qualified RA reviewer를 확보하고 review record workflow를 실제 운영합니다.
 4. 첫 5–10명 CMC/RA user interview와 usability test로 task priority를 검증합니다.
 5. Monitoring cadence, superseded handling, correction ownership이 정해진 뒤 update detection automation을 설계합니다.

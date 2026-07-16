@@ -150,3 +150,20 @@ RAG/accounts/private workspace only after evidence
 ```
 
 Current execution details and exit criteria are maintained in `docs/PRODUCT_PLAN.md`.
+
+## 7. Safety Intelligence review — 2026-07-16
+
+| Proposal                               | Decision                        | Reason                                                                 |
+| -------------------------------------- | ------------------------------- | ---------------------------------------------------------------------- |
+| Add adverse-event news                 | `MODIFY`                        | News framing can overstate causality and collapse signal/action states |
+| Use `Safety Intelligence`              | `ADOPT`                         | Fits official signal → action → implementation workflow                |
+| Add as top-level navigation            | `DEFER`                         | Validate first as a `Regulatory Updates` category/filter               |
+| FDA AEMS potential signals             | `ADOPT_WITH_CAUSALITY_BOUNDARY` | Official source explicitly says listing does not establish causality   |
+| FDA Drug Safety Communications         | `ADOPT`                         | Official communication source with clearer action context              |
+| FDA SrLC and REMS actions              | `ADOPT`                         | Direct connection to labeling and risk-management execution            |
+| EMA PRAC and product wording           | `ADOPT`                         | Official monthly signal/action and multilingual wording source         |
+| Raw AEMS/FAERS ingestion and ranking   | `REJECT_CURRENT_SCOPE`          | Duplicate/incomplete/unverified data and no incidence inference        |
+| Automatic causality/action publication | `REJECT_CURRENT_SCOPE`          | Requires official outcome and qualified review                         |
+| First 4–6 curated records              | `ADOPT_AFTER_SCHEMA`            | Bounded test of filter, detail template, and review contract           |
+
+Detailed source, schema, publication, and exclusion decisions are maintained in `docs/SAFETY_INTELLIGENCE_PLAN.md`.

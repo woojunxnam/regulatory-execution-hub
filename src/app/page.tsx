@@ -23,35 +23,27 @@ const websiteStructuredData = {
 const popularTasks = [
   {
     number: "01",
-    title: "Review an update before acting",
-    description:
-      "Check document status, source dates, comment deadlines, and applicability boundaries.",
+    title: "Review regulatory updates",
+    description: "Document status, source dates, and applicability.",
     href: "/regulatory-updates",
-    linkLabel: "Review regulatory updates",
   },
   {
     number: "02",
-    title: "Trace sources behind a CTD section",
-    description:
-      "Map demonstration evidence to CTD destinations and expose missing or unapproved sources.",
+    title: "Trace CTD sources",
+    description: "Evidence destinations, approval state, and gaps.",
     href: "/submission-navigator/ctd/source-matrix",
-    linkLabel: "Open Source-to-CTD Matrix",
   },
   {
     number: "03",
-    title: "Prepare a CTD Quality section",
-    description:
-      "Start with section purpose, expected information, source documents, gaps, and reviewer questions.",
+    title: "Prepare CTD Quality",
+    description: "Section purpose, source documents, and review questions.",
     href: "/submission-navigator/ctd",
-    linkLabel: "Open CTD Builder",
   },
   {
     number: "04",
     title: "Check QOS traceability",
-    description:
-      "Connect draft Module 2.3 content to available Module 3 evidence and consistency checks.",
+    description: "Module 2.3-to-3 evidence and consistency.",
     href: "/submission-navigator/ctd/module-2/quality-overall-summary",
-    linkLabel: "Review QOS traceability",
   },
 ];
 
@@ -63,42 +55,6 @@ const sourceStatusLabels = {
 };
 
 const latestUpdates = regulatoryUpdates.slice(0, 3);
-
-function HeroActions({ className = "" }: { className?: string }) {
-  return (
-    <div className={className}>
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <Link
-          href="/regulatory-updates"
-          className="rounded-xl bg-white px-5 py-3 text-center text-sm font-bold text-[#0d4a4d] no-underline transition hover:bg-[#eaf3ed]"
-        >
-          Review regulatory updates
-        </Link>
-        <Link
-          href="/submission-navigator/ctd"
-          className="rounded-xl border border-white/35 px-5 py-3 text-center text-sm font-bold text-white no-underline transition hover:border-white hover:bg-white/10"
-        >
-          Open CTD Builder
-        </Link>
-      </div>
-
-      <dl className="mt-7 grid gap-2 border-t border-white/14 pt-5 text-sm sm:grid-cols-2">
-        <div>
-          <dt className="text-[0.68rem] font-bold tracking-[0.13em] text-[#91b8ae] uppercase">
-            Available now
-          </dt>
-          <dd className="mt-1 font-semibold">Regulatory Updates · CTD Quality</dd>
-        </div>
-        <div>
-          <dt className="text-[0.68rem] font-bold tracking-[0.13em] text-[#d9bc86] uppercase">
-            Coming next
-          </dt>
-          <dd className="mt-1 font-semibold">Submission Guides · Post-Approval Changes</dd>
-        </div>
-      </dl>
-    </div>
-  );
-}
 
 export default function HomePage() {
   return (
@@ -118,64 +74,69 @@ export default function HomePage() {
           className="bg-teal absolute -top-36 right-[-8rem] -z-10 size-[34rem] rounded-full opacity-20 blur-[120px]"
         />
 
-        <div className="mx-auto grid max-w-7xl gap-9 px-5 py-12 md:py-16 lg:grid-cols-[0.9fr_1.1fr] lg:grid-rows-[auto_auto] lg:items-center lg:gap-y-0 lg:px-8 lg:py-20">
-          <div className="max-w-xl lg:col-start-1 lg:row-start-1 lg:self-end">
+        <div className="mx-auto flex max-w-6xl flex-col items-center px-5 py-12 text-center md:py-16 lg:px-8">
+          <div className="max-w-3xl">
             <p className="text-xs font-bold tracking-[0.18em] text-[#a8cec1] uppercase">
               For Regulatory Affairs teams
             </p>
-            <h1 className="mt-4 font-serif text-4xl leading-[1.03] font-semibold tracking-[-0.035em] text-balance sm:text-5xl md:text-6xl">
-              Find what to prepare — traced to official FDA and EMA sources.
+            <h1 className="mt-3 font-serif text-4xl leading-[1.02] font-semibold tracking-[-0.035em] text-balance sm:text-5xl md:text-6xl">
+              What do you need to prepare?
             </h1>
-            <p className="mt-5 max-w-lg text-base leading-7 text-[#cfddda] sm:text-lg sm:leading-8">
-              Start with a regulatory update or CTD task. See what is available, what is planned,
-              and where qualified review is still pending.
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[#cfddda] sm:text-lg">
+              Find source-checked FDA and EMA updates, CTD references, and the next available
+              workflow.
             </p>
           </div>
 
-          <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          <div className="mt-7 w-full">
             <RegulatoryQuery />
           </div>
-          <HeroActions className="lg:col-start-1 lg:row-start-2 lg:mt-7 lg:self-start" />
+
+          <dl
+            aria-label="Coverage status"
+            className="mt-5 flex flex-col items-center justify-center gap-2 text-xs sm:flex-row sm:gap-5"
+          >
+            <div className="flex items-center gap-2">
+              <dt className="font-bold tracking-[0.11em] text-[#91b8ae] uppercase">Live</dt>
+              <dd className="font-semibold">Regulatory Updates · CTD Quality</dd>
+            </div>
+            <div className="hidden h-3 w-px bg-white/25 sm:block" aria-hidden="true" />
+            <div className="flex items-center gap-2">
+              <dt className="font-bold tracking-[0.11em] text-[#d9bc86] uppercase">Next</dt>
+              <dd className="font-semibold">Application Guides · Lifecycle Changes</dd>
+            </div>
+          </dl>
         </div>
       </section>
 
       <section
         aria-labelledby="popular-tasks-title"
-        className="border-line border-b bg-white py-16"
+        className="border-line border-b bg-white py-12"
       >
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-teal text-xs font-bold tracking-[0.17em] uppercase">
-                Available now
-              </p>
-              <h2 id="popular-tasks-title" className="mt-2 font-serif text-4xl font-semibold">
-                Choose a live task.
-              </h2>
-            </div>
-            <p className="text-muted max-w-xl text-sm leading-6 md:text-right">
-              Every route below opens published coverage. Planned work stays in the compact roadmap
-              above until a source-backed workflow is ready.
-            </p>
-          </div>
+          <p className="text-teal text-xs font-bold tracking-[0.17em] uppercase">Available now</p>
+          <h2 id="popular-tasks-title" className="mt-2 font-serif text-3xl font-semibold">
+            Open a live workspace.
+          </h2>
 
-          <div className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             {popularTasks.map((task) => (
               <Link
                 key={task.number}
                 href={task.href}
-                className="border-line group flex min-h-64 flex-col rounded-2xl border bg-[#f8faf7] p-5 no-underline transition hover:-translate-y-0.5 hover:border-[#8eb0a2] hover:bg-white hover:shadow-lg"
+                className="border-line group rounded-2xl border bg-[#f8faf7] p-5 no-underline transition hover:-translate-y-0.5 hover:border-[#8eb0a2] hover:bg-white hover:shadow-md"
               >
                 <div className="flex items-center justify-between gap-3">
-                  <span className="font-serif text-2xl text-[#61746c]">{task.number}</span>
-                  <StatusBadge tone="teal">Available</StatusBadge>
+                  <span className="font-serif text-xl text-[#61746c]">{task.number}</span>
+                  <span
+                    aria-hidden="true"
+                    className="text-teal transition group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
                 </div>
-                <h3 className="mt-7 font-serif text-2xl font-semibold">{task.title}</h3>
-                <p className="text-muted mt-3 text-sm leading-6">{task.description}</p>
-                <span className="text-teal mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold underline">
-                  {task.linkLabel}
-                  <span aria-hidden="true">→</span>
-                </span>
+                <h3 className="mt-4 font-serif text-xl font-semibold">{task.title}</h3>
+                <p className="text-muted mt-2 text-sm leading-5">{task.description}</p>
               </Link>
             ))}
           </div>
@@ -184,15 +145,15 @@ export default function HomePage() {
 
       <section
         aria-labelledby="latest-updates-title"
-        className="mx-auto max-w-7xl px-5 py-16 lg:px-8"
+        className="mx-auto max-w-7xl px-5 py-12 lg:px-8"
       >
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-teal text-xs font-bold tracking-[0.17em] uppercase">
-              Manually curated
+              Official source checked
             </p>
-            <h2 id="latest-updates-title" className="mt-2 font-serif text-4xl font-semibold">
-              Latest source-checked updates
+            <h2 id="latest-updates-title" className="mt-2 font-serif text-3xl font-semibold">
+              Latest updates
             </h2>
           </div>
           <Link className="text-teal text-sm font-bold underline" href="/regulatory-updates">
@@ -204,7 +165,7 @@ export default function HomePage() {
           {latestUpdates.map((record) => (
             <article
               key={record.slug}
-              className="border-line grid gap-4 rounded-2xl border bg-white p-5 md:grid-cols-[auto_1fr_auto] md:items-center"
+              className="border-line grid gap-3 rounded-2xl border bg-white p-4 md:grid-cols-[auto_1fr_auto] md:items-center"
             >
               <div className="flex flex-wrap gap-2 md:w-48">
                 <StatusBadge tone={record.agency === "FDA" ? "blue" : "teal"}>
@@ -233,24 +194,20 @@ export default function HomePage() {
           ))}
         </div>
 
-        <div className="bg-teal-dark mt-10 grid gap-5 rounded-3xl p-6 text-white md:grid-cols-[1fr_auto] md:items-center md:p-8">
+        <div className="bg-teal-dark mt-8 grid gap-4 rounded-2xl p-5 text-white md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <p className="text-xs font-bold tracking-[0.15em] text-[#a8cec1] uppercase">
-              Trust boundary
-            </p>
-            <h2 className="mt-2 font-serif text-2xl font-semibold">
-              Official sources first. Review status visible.
+            <h2 className="font-serif text-xl font-semibold">
+              Source and review status stay visible.
             </h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-[#cfddda]">
-              Draft guidance stays draft. Qualified regulatory review is shown only when a review
-              record exists. Nothing here is a final regulatory determination.
+            <p className="mt-1 max-w-3xl text-sm leading-5 text-[#cfddda]">
+              Draft stays draft; qualified review appears only with a review record.
             </p>
           </div>
           <Link
             href="/methodology"
             className="rounded-xl bg-white px-5 py-3 text-center text-sm font-bold text-[#0d4a4d] no-underline"
           >
-            Review Trust &amp; Sources
+            How sources are handled
           </Link>
         </div>
       </section>
