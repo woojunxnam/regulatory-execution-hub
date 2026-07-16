@@ -107,18 +107,18 @@ qualified_review_record: null
 9. Patient treatment advice 또는 stop/start recommendation을 생성하지 않는다.
 10. Superseded, withdrawn, archived, or completed state를 추적할 version history가 있다.
 
-## First curated slice
+## First curated slice — implemented locally
 
-4–6개의 official-source record로 filter와 detail template을 먼저 검증한다.
+6개의 official-source record로 filter와 detail template을 검증했다. 모든 record는 `last_verified_date: 2026-07-16`, `editorial_review_status: source_checked`, `qualified_review_record: null`을 유지한다.
 
-- FDA potential signal
-- FDA Drug Safety Communication
-- FDA SrLC labeling change
-- EMA PRAC recommendation
-- EMA product-information wording
-- EMA DHPC, referral, or urgent restriction
+- FDA AEMS: corticotropin product의 drug-hypersensitivity potential signal
+- FDA Drug Safety Communication: alli (orlistat) kidney-risk labeling action
+- EMA PRAC meeting highlights: desogestrel/etonogestrel meningioma risk-minimisation action
+- EMA PRAC recommendation: darolutamide angioedema product-information update
+- EMA product-information wording: gemcitabine DRESS wording
+- EMA DHPC: Savene limited-batch quality-defect communication
 
-구체적인 product record는 source package, exact source location, acceptance-criteria review가 완료된 후 선택한다.
+FDA SrLC, REMS, EMA referral, urgent restriction는 source type 확장 후보이며 이번 bounded slice에는 포함하지 않는다.
 
 ## Explicit exclusions
 
@@ -132,10 +132,10 @@ qualified_review_record: null
 
 ## Delivery sequence
 
-1. Shared `OfficialSource`와 update/checklist review primitives를 확정한다.
-2. Safety-specific schema와 validation tests를 추가한다.
-3. 4–6개 source package를 freeze하고 editorial acceptance review를 수행한다.
-4. `Regulatory Updates` filter와 detail template을 구현한다.
-5. Labeling/lifecycle route와 `potentially_impacted` 관계를 연결한다.
-6. Qualified reviewer feedback과 user testing 후 recurring source-check cadence를 정한다.
-7. Monitoring automation은 detection/diff candidate까지만 허용하고 publication은 review gate를 유지한다.
+1. [x] Shared `OfficialSource`와 update/checklist review primitives를 확정한다.
+2. [x] Safety-specific schema와 validation tests를 추가한다.
+3. [x] 6개 source package를 freeze하고 publication acceptance criteria를 코드와 test로 검증한다.
+4. [x] `Regulatory Updates` filter와 detail template을 구현한다.
+5. [ ] Labeling/lifecycle route와 `potentially_impacted` 관계를 연결한다.
+6. [ ] Qualified reviewer feedback과 user testing 후 recurring source-check cadence를 정한다.
+7. [ ] Monitoring automation은 detection/diff candidate까지만 허용하고 publication은 review gate를 유지한다.

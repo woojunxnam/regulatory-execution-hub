@@ -17,7 +17,9 @@ GitHub Pages URL은 application이 아니라 repository `README.md`를 렌더링
 
 ## 구현된 범위
 
-- FDA 4개, EMA 4개의 manually curated source-checked update record와 static detail page
+- FDA 6개, EMA 8개의 manually curated source-checked update record와 static detail page
+- 6개 Safety Intelligence record: signal, assessment, regulatory action, implementation 상태를 분리한 filter/detail workflow
+- shared `OfficialSource` / `ChecklistItem` schema와 qualified-review gate
 - source document status, official-source status, editorial-review status, source date, last-verification date, applicability boundary
 - CTD Module 3 Drug Product navigation과 6개 structured section: `3.2.P.1`, `3.2.P.2`, `3.2.P.3`, `3.2.P.5`, `3.2.P.7`, `3.2.P.8`
 - linked Module `2.3` Quality Overall Summary traceability
@@ -32,7 +34,7 @@ GitHub Pages URL은 application이 아니라 repository `README.md`를 렌더링
 ## 아직 구현되지 않은 범위
 
 - Continuous FDA/EMA monitoring 또는 automatic publication
-- Safety Intelligence filter/detail records; source and publication boundary만 `docs/SAFETY_INTELLIGENCE_PLAN.md`에 확정
+- Safety Intelligence의 continuous monitoring, automatic ingestion 또는 automatic publication
 - Source-backed FDA Initial IND 및 EMA Centralised MAA checklist
 - FDA/EMA post-approval change classification workflow
 - Accounts, persistence, confidential upload, external AI answer generation, analytics, subscriptions
@@ -69,6 +71,16 @@ Home V3 local and public-production verification:
 - Home, Regulatory Updates, `3.2.P.5` axe WCAG A/AA detected violation `0`
 - Home density: 약 `210 words`, `3` top-level sections, `1831px` page height at `1280 × 720`
 
+Safety Intelligence release candidate local verification:
+
+- Formatting and ESLint zero warnings
+- strict TypeScript
+- Vitest `13 files / 52 tests`
+- Next.js production build `41 static/SSG routes`
+- desktop/mobile Playwright `90/90`
+- Regulatory Updates axe WCAG A/AA detected violation `0`
+- Production deployment: pending PR review and merge
+
 Production을 재검증하려면 다음 environment variable을 사용합니다.
 
 ```powershell
@@ -81,6 +93,7 @@ npm run test:e2e
 - CTD schema and rules: `src/lib/ctd/`
 - CTD records and source matrix: `src/data/ctd/`
 - Regulatory Updates schema and records: `src/lib/regulatory-updates/`, `src/data/regulatory-updates/`
+- Shared regulatory source/checklist controls: `src/lib/regulatory/`
 - Home routing data and deterministic matcher: `src/data/home/`, `src/lib/navigation/`
 - Reusable UI: `src/components/`
 - Public discovery configuration: `src/lib/site.ts`, `src/app/robots.ts`, `src/app/sitemap.ts`

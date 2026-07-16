@@ -21,6 +21,19 @@ const sourceStatusLabels = {
   updated: "Updated",
 };
 
+const classificationTones = {
+  required: "rose",
+  conditional: "blue",
+  recommended: "teal",
+  potentially_impacted: "gold",
+  best_practice: "teal",
+  undetermined: "neutral",
+} as const;
+
+function statusLabel(value: string) {
+  return value.replaceAll("_", " ");
+}
+
 export function generateStaticParams() {
   return regulatoryUpdates.map((record) => ({ slug: record.slug }));
 }
@@ -73,6 +86,9 @@ export default async function RegulatoryUpdateDetailPage({
               <StatusBadge tone={record.sourceDocumentStatus === "draft" ? "gold" : "neutral"}>
                 {sourceStatusLabels[record.sourceDocumentStatus]}
               </StatusBadge>
+              {record.category === "safety_intelligence" ? (
+                <StatusBadge tone="rose">Safety Intelligence</StatusBadge>
+              ) : null}
             </div>
             <dl className="text-muted mt-5 grid gap-3 text-sm">
               <div>
@@ -107,6 +123,65 @@ export default async function RegulatoryUpdateDetailPage({
         </section>
       ) : null}
 
+      {record.safety ? (
+        <section
+          aria-labelledby="safety-state-title"
+          className="border-rose/20 bg-rose-soft mb-10 rounded-3xl border p-6 md:p-8"
+        >
+          <p className="text-rose text-xs font-bold tracking-[0.15em] uppercase">
+            Safety Intelligence boundary
+          </p>
+          <h2 id="safety-state-title" className="mt-2 font-serif text-3xl font-semibold">
+            Signal, action, and implementation stay separate.
+          </h2>
+          <p className="text-muted mt-3 max-w-4xl text-sm leading-6">
+            These fields reproduce the current official-source stage without turning a signal into
+            causality, incidence, or patient-specific advice.
+          </p>
+          <dl className="border-rose/15 mt-6 grid gap-4 rounded-2xl border bg-white/70 p-4 sm:grid-cols-2">
+            <div>
+              <dt className="text-muted text-xs font-bold tracking-wide uppercase">Safety topic</dt>
+              <dd className="mt-2 text-sm font-semibold">{record.safety.safetyTopic}</dd>
+            </div>
+            <div>
+              <dt className="text-muted text-xs font-bold tracking-wide uppercase">
+                Product / substance scope
+              </dt>
+              <dd className="mt-2 text-sm font-semibold">
+                {record.safety.productNames.join(", ")}
+              </dd>
+              <dd className="text-muted mt-1 text-xs">
+                Active substance: {record.safety.activeSubstances.join(", ")}
+              </dd>
+            </div>
+          </dl>
+          <dl className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="border-rose/15 rounded-2xl border bg-white/70 p-4">
+              <dt className="text-muted text-xs font-bold tracking-wide uppercase">Safety stage</dt>
+              <dd className="mt-2 font-semibold">{statusLabel(record.safety.safetyStage)}</dd>
+            </div>
+            <div className="border-rose/15 rounded-2xl border bg-white/70 p-4">
+              <dt className="text-muted text-xs font-bold tracking-wide uppercase">Causality</dt>
+              <dd className="mt-2 font-semibold">{statusLabel(record.safety.causalityStatus)}</dd>
+            </div>
+            <div className="border-rose/15 rounded-2xl border bg-white/70 p-4">
+              <dt className="text-muted text-xs font-bold tracking-wide uppercase">
+                Regulatory outcome
+              </dt>
+              <dd className="mt-2 font-semibold">{statusLabel(record.safety.regulatoryOutcome)}</dd>
+            </div>
+            <div className="border-rose/15 rounded-2xl border bg-white/70 p-4">
+              <dt className="text-muted text-xs font-bold tracking-wide uppercase">
+                Source implementation state
+              </dt>
+              <dd className="mt-2 font-semibold">
+                {statusLabel(record.safety.implementationStatus)}
+              </dd>
+            </div>
+          </dl>
+        </section>
+      ) : null}
+
       <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
         <div className="space-y-6">
           <section className="border-line rounded-3xl border bg-white p-7">
@@ -127,6 +202,30 @@ export default async function RegulatoryUpdateDetailPage({
             <h2 className="mt-3 font-serif text-3xl font-semibold">What is not determined here</h2>
             <p className="text-muted mt-4 leading-7">{record.applicabilityBoundary}</p>
           </section>
+
+          {record.safety ? (
+            <section className="border-line rounded-3xl border bg-white p-7">
+              <p className="text-teal text-xs font-bold tracking-[0.15em] uppercase">
+                Artifact impact
+              </p>
+              <h2 className="mt-2 font-serif text-3xl font-semibold">
+                Potentially affected documents
+              </h2>
+              <ul className="mt-5 space-y-3">
+                {record.safety.affectedDocuments.map((document) => (
+                  <li
+                    key={document.label}
+                    className="border-line flex flex-wrap items-center justify-between gap-3 rounded-2xl border bg-[#f8faf7] p-4"
+                  >
+                    <span className="text-sm font-semibold">{document.label}</span>
+                    <StatusBadge tone={classificationTones[document.classification]}>
+                      {statusLabel(document.classification)}
+                    </StatusBadge>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           <section className="border-line rounded-3xl border bg-white p-7">
             <p className="text-teal text-xs font-bold tracking-[0.15em] uppercase">
@@ -185,6 +284,17 @@ export default async function RegulatoryUpdateDetailPage({
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </section>
+
+          {record.safety ? (
+            <section className="border-line rounded-3xl border bg-white p-6">
+              <h2 className="font-serif text-2xl font-semibold">Potentially affected functions</h2>
+              <ul className="text-muted mt-4 space-y-2 text-sm">
+                {record.safety.potentiallyAffectedFunctions.map((functionName) => (
+                  <li key={functionName}>• {functionName}</li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           <section className="border-gold/25 bg-gold-soft rounded-3xl border p-6">
             <p className="text-xs font-bold tracking-[0.15em] text-[#74440f] uppercase">

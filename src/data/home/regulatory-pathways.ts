@@ -257,6 +257,27 @@ export const regulatoryPathways: RegulatoryPathway[] = [
     priority: 88,
   },
   {
+    id: "safety-intelligence",
+    category: "Regulatory intelligence",
+    title: "Safety Intelligence",
+    description:
+      "Review source-checked FDA and EMA potential signals, safety actions, product-information wording, and implementation status without inferring causality.",
+    status: "available",
+    href: "/regulatory-updates",
+    keywords: [
+      "safety intelligence",
+      "drug safety",
+      "adverse event",
+      "aems",
+      "faers",
+      "prac signal",
+      "safety communication",
+      "dhpc",
+      "labeling change",
+    ],
+    priority: 94,
+  },
+  {
     id: "regulatory-updates",
     category: "Regulatory intelligence",
     title: "Curated FDA and EMA Updates",
@@ -281,5 +302,5 @@ export const exampleRegulatoryQueries = [
   "Sources for 3.2.P.5",
   "Quality Overall Summary",
   "Latest FDA updates",
-  "Latest EMA updates",
+  "Safety Intelligence",
 ];
