@@ -7,11 +7,11 @@ FDA/EMA 규제 업무를 official source에서 실제 preparation task로 연결
 - URL: `https://regulatory-execution-hub.vercel.app`
 - Hosting: Vercel Git integration
 - Production branch: `main`
-- Current verified production commit: `d1895476d5c607c6f7962dc2a278a6543fb57831`
-- Current production verification: desktop/mobile Playwright `88/88` pass
-- Home V2 release candidate branch: `codex/home-v2-production`
+- Home V2 application commit: `ac6c3ad576edddf2e54819bc42477a540dfb9dd2`
+- Production verification date: `2026-07-16`
+- Production verification: desktop/mobile Playwright `88/88` pass
 
-PR #2를 통해 expanded CTD, Regulatory Updates MVP, trust/policy pages, security headers, SEO discovery files가 이미 `main` production에 반영되었습니다. Home V2는 이 production baseline 위에서 첫 화면을 live task 중심으로 단순화하는 별도 release candidate입니다.
+PR #2를 통해 expanded CTD, Regulatory Updates MVP, trust/policy pages, security headers, SEO discovery files가 production에 반영되었습니다. PR #3은 이 foundation 위에서 첫 화면을 live task 중심으로 단순화한 Home V2를 production에 반영했습니다.
 
 GitHub Pages URL은 application이 아니라 repository `README.md`를 렌더링하므로 production URL로 사용하지 않습니다.
 
@@ -24,7 +24,7 @@ GitHub Pages URL은 application이 아니라 repository `README.md`를 렌더링
 - Source-to-CTD Matrix, text/CSV authoring packet export, deterministic readiness and consistency rules
 - content/source history와 content version·source-set hash에 고정된 `ReviewRecord` gate
 - `/about`, `/editorial-policy`, `/privacy`, `/corrections`, canonical metadata, `robots.txt`, `sitemap.xml`, web manifest, security headers
-- Home V2 release candidate: live-task navigation, single-line deterministic page finder, latest 3 updates, compact roadmap, mobile menu
+- Home V2: live-task navigation, single-line deterministic page finder, latest 3 updates, compact roadmap, mobile menu
 
 모든 CTD sample synthesis는 `source_verification_required` 상태입니다. 실제 qualified review evidence가 없으므로 `human_reviewed` 또는 `reviewer_ready`로 표시하지 않습니다. Update record는 `source_checked`이며 qualified regulatory review를 의미하지 않습니다.
 
@@ -57,7 +57,7 @@ npm run build
 npm run test:e2e
 ```
 
-Home V2 local verification target:
+Home V2 local and production verification:
 
 - Formatting and ESLint zero warnings
 - strict TypeScript

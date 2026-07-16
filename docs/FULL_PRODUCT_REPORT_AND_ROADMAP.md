@@ -7,7 +7,7 @@
 
 > **Planning update — 2026-07-16:** 외부 GPT research report와 `Application & Lifecycle Preparation Hub` 제안을 검토하여 current release sequence를 `docs/PRODUCT_PLAN.md`에 반영했다. 이 문서는 detailed snapshot과 long-range report로 유지되며, build 우선순위가 다를 경우 `docs/PRODUCT_PLAN.md`가 current execution order를 정한다. 제안별 수용·수정·유보 판단은 `docs/EXTERNAL_REVIEW_DECISION_LOG.md`에 기록했다.
 
-> **Production/Home V2 update — 2026-07-16:** PR #2는 merge되어 commit `d1895476d5c607c6f7962dc2a278a6543fb57831`이 public production에 배포·검증되었다. 따라서 아래에서 PR #2, old branch, commit `5d81907`, 또는 “hardening이 production에 없음”이라고 설명하는 부분은 당시의 historical snapshot이다. 현재 release candidate는 `codex/home-v2-production`이며, Home을 약 330 words·3 top-level sections로 축소하고 live Updates/CTD navigation, deterministic page finder, latest 3 updates, compact roadmap, mobile menu를 제공한다. Current truth와 실행 순서는 `docs/IMPLEMENTATION_STATUS.md`와 `docs/PRODUCT_PLAN.md`가 우선한다.
+> **Production/Home V2 update — 2026-07-16:** PR #2와 PR #3이 merge되어 Home V2 application commit `ac6c3ad576edddf2e54819bc42477a540dfb9dd2`이 public production에 배포·검증되었다. 따라서 아래에서 PR #2, old branch, commit `5d81907`, 또는 “hardening/Home V2가 production에 없음”이라고 설명하는 부분은 당시의 historical snapshot이다. Home V2는 약 330 words·3 top-level sections, live Updates/CTD navigation, deterministic page finder, latest 3 updates, compact roadmap, mobile menu를 제공하며 public desktop/mobile suite `88/88`을 통과했다. Current truth와 실행 순서는 `docs/IMPLEMENTATION_STATUS.md`와 `docs/PRODUCT_PLAN.md`가 우선한다.
 
 ---
 

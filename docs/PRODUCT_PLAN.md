@@ -69,15 +69,16 @@ Labeling & e-Labeling
 
 - URL: `https://regulatory-execution-hub.vercel.app`
 - Production branch: `main`
-- Production baseline commit: `d1895476d5c607c6f7962dc2a278a6543fb57831`
-- PR #2 merged; expanded CTD, Regulatory Updates, trust/policy pages, security headers, and SEO routes are public
+- Home V2 application commit: `ac6c3ad576edddf2e54819bc42477a540dfb9dd2`
+- PR #2 and PR #3 merged; expanded CTD, Regulatory Updates, trust/policy/security/SEO layer, and Home V2 are public
 - Latest verified production suite: desktop/mobile `88/88` pass
 
-### Current Home V2 work
+### Home V2 release record
 
-- Branch: `codex/home-v2-production`
-- State: local release candidate; PR/deployment pending
-- Local checks: format/lint/type-check, `11 files / 44 tests`, `35` routes, desktop/mobile `88/88` pass
+- Historical branch: `codex/home-v2-production`
+- Merged PR: `https://github.com/woojunxnam/regulatory-execution-hub/pull/3`
+- State: Vercel production deployed and public-URL verified
+- Local and production checks: format/lint/type-check, `11 files / 44 tests`, `35` routes, desktop/mobile `88/88` pass
 - Qualified regulatory `ReviewRecord`: 없음
 - Home V2 reduces the Home from about `652` to `330` words, from `5` to `3` top-level sections, and prioritizes live Updates/CTD tasks plus a deterministic page finder.
 - Domain decision: use the existing `.vercel.app` URL only for a non-commercial public prototype; choose an owned custom domain and intended-use hosting plan before a commercial launch.
@@ -325,7 +326,7 @@ Implementation note — Home V2, 2026-07-16:
 - 이는 navigation layer이지 regulatory answer generation이 아니다. Source-backed RAG/LLM answer는 source coverage, citation contract, evaluation set, qualified review gate가 준비될 때까지 deferred 상태다.
 - Latest local verification: format, lint, type-check, 11 unit files/44 tests, production build 35 routes, desktop/mobile E2E 88/88 tests, Home, Updates, and 3.2.P.5 WCAG A/AA axe scans pass.
 - Home V2 density measurement: about 330 words, 3 top-level sections, 2317px page height at 1280 × 720.
-- Home V2 production 반영은 current branch review/merge와 Vercel deployment 후 별도로 확인한다.
+- Home V2는 PR #3 merge 후 Vercel production과 public `88/88` suite로 재검증했다.
 
 Deliverables:
 
@@ -564,11 +565,10 @@ user_confidence
 
 ## 12. Immediate next actions
 
-1. Review, PR, merge, and production-verify Home V2.
-2. Preserve the qualified-human-review blocker as visible.
-3. Define shared `OfficialSource` and `ChecklistItem` schemas outside UI components.
-4. Freeze FDA Initial IND source package and checklist acceptance criteria; implement it as the first application guide.
-5. Prepare EMA Centralised MAA and FDA/EMA post-approval change source packages.
-6. Recruit first 5–10 CMC/RA target practitioners and run task-based usability tests.
-7. Decide whether launch remains a non-commercial prototype or moves toward commercial use; plan an owned domain and appropriate hosting plan before the latter.
-8. Add monitoring automation only after source cadence, editorial review, superseded handling, and correction ownership are defined.
+1. Preserve the qualified-human-review blocker as visible.
+2. Define shared `OfficialSource` and `ChecklistItem` schemas outside UI components.
+3. Freeze FDA Initial IND source package and checklist acceptance criteria; implement it as the first application guide.
+4. Prepare EMA Centralised MAA and FDA/EMA post-approval change source packages.
+5. Recruit first 5–10 CMC/RA target practitioners and run task-based usability tests.
+6. Decide whether launch remains a non-commercial prototype or moves toward commercial use; plan an owned domain and appropriate hosting plan before the latter.
+7. Add monitoring automation only after source cadence, editorial review, superseded handling, and correction ownership are defined.

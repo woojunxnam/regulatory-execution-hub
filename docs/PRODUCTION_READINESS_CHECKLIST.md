@@ -4,18 +4,19 @@ Last updated: `2026-07-16`
 
 ## 1. Current production truth
 
-| Area                                | State                                           | Public production |
-| ----------------------------------- | ----------------------------------------------- | ----------------: |
-| CTD Quality foundation              | Implemented and verified                        |               Yes |
-| Regulatory Updates MVP              | 8 source-checked FDA/EMA records                |               Yes |
-| Trust/policy/security/SEO layer     | Implemented and verified                        |               Yes |
-| Home V2 live-task redesign          | Release candidate on `codex/home-v2-production` |           Not yet |
-| Qualified regulatory `ReviewRecord` | Missing                                         |                No |
-| Continuous FDA/EMA monitoring       | Not implemented                                 |                No |
-| Source-backed IND/MAA checklists    | Not implemented                                 |                No |
+| Area                                | State                            | Public production |
+| ----------------------------------- | -------------------------------- | ----------------: |
+| CTD Quality foundation              | Implemented and verified         |               Yes |
+| Regulatory Updates MVP              | 8 source-checked FDA/EMA records |               Yes |
+| Trust/policy/security/SEO layer     | Implemented and verified         |               Yes |
+| Home V2 live-task redesign          | Deployed and production verified |               Yes |
+| Qualified regulatory `ReviewRecord` | Missing                          |                No |
+| Continuous FDA/EMA monitoring       | Not implemented                  |                No |
+| Source-backed IND/MAA checklists    | Not implemented                  |                No |
 
 Production URL: `https://regulatory-execution-hub.vercel.app`  
-Current verified production commit: `d1895476d5c607c6f7962dc2a278a6543fb57831`
+Home V2 application commit: `ac6c3ad576edddf2e54819bc42477a540dfb9dd2`  
+Production verification date: `2026-07-16`
 
 ## 2. Home V2 release gate
 
@@ -30,11 +31,11 @@ Current verified production commit: `d1895476d5c607c6f7962dc2a278a6543fb57831`
 - [x] Formatting, lint, type-check, unit, production build
 - [x] Desktop/mobile E2E `88/88`
 - [x] Home and critical-route accessibility/console checks
-- [ ] Commit and push reviewed diff
-- [ ] Create PR and confirm GitHub/Vercel checks
-- [ ] Merge to `main`
-- [ ] Confirm Vercel production commit
-- [ ] Re-run `88/88` against public production
+- [x] Commit and push reviewed diff
+- [x] Create PR and confirm GitHub/Vercel checks
+- [x] Merge PR #3 to `main`
+- [x] Confirm Vercel production deployment for Home V2 application commit
+- [x] Re-run `88/88` against public production
 
 ## 3. Required immediately after deployment
 
@@ -101,4 +102,4 @@ Before spending money or commercial launch, recheck current official Vercel pric
 - Stage B — trusted regulatory beta: Stage A plus qualified ownership/review, maintenance cadence, corrections operation, source-backed application guides.
 - Stage C — commercial workspace: Stage B plus owned domain, suitable hosting plan, legal/privacy/security review, account/data governance, monitoring and support.
 
-Current honest target: **Home V2를 포함한 Stage A technical readiness**. Regulatory governance gate는 계속 open 상태입니다.
+Current honest state: **Home V2를 포함한 Stage A technical readiness 완료**. Regulatory governance gate는 계속 open 상태입니다.
