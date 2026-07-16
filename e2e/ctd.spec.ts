@@ -2,7 +2,10 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const routes = [
-  { path: "/", heading: "Ask what you need to prepare." },
+  {
+    path: "/",
+    heading: "Find what to prepare — traced to official FDA and EMA sources.",
+  },
   { path: "/about", heading: "What this product is — and is not." },
   { path: "/applications", heading: "Prepare the application, not only the dossier." },
   { path: "/corrections", heading: "Corrections and content feedback" },
@@ -113,18 +116,19 @@ test("3.2.P.5 controls are keyboard accessible", async ({ page }) => {
 test("Home guided search separates available and planned coverage", async ({ page }) => {
   await page.goto("/");
 
-  const query = page.getByRole("textbox", {
-    name: "What are you preparing or trying to verify?",
+  const query = page.getByRole("searchbox", {
+    name: "What do you need to prepare or verify?",
   });
   await query.fill("What sources support 3.2.P.5?");
-  await page.getByRole("button", { name: "Find execution path" }).click();
+  await page.getByRole("button", { name: "Find a page" }).click();
 
   await expect(page.getByRole("link", { name: /3.2.P.5 Control of Drug Product/ })).toBeVisible();
   await expect(
-    page.getByText("Navigation result only — not a generated regulatory answer or determination."),
+    page.getByText("Guided navigation only — no generated regulatory advice."),
   ).toBeVisible();
 
-  await page.getByRole("button", { name: "Show FDA IND preparation support" }).click();
+  await query.fill("FDA IND");
+  await page.getByRole("button", { name: "Find a page" }).click();
   await expect(
     page
       .getByTestId("query-results")
@@ -136,7 +140,7 @@ test("Home guided search separates available and planned coverage", async ({ pag
     }),
   ).toHaveAttribute("href", "/applications#fda-initial-ind");
 
-  await page.getByRole("button", { name: "What FDA and EMA updates are available?" }).click();
+  await page.getByRole("button", { name: "Latest FDA updates" }).click();
   await expect(
     page.getByTestId("query-results").getByRole("link", {
       name: "Open Curated FDA and EMA Updates",
@@ -144,16 +148,28 @@ test("Home guided search separates available and planned coverage", async ({ pag
   ).toHaveAttribute("href", "/regulatory-updates");
 });
 
-test("Home navigation treats CTD as one of four product areas", async ({ page }) => {
+test("Home navigation prioritizes live tasks and keeps planned work compact", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("link", { name: "Applications", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Lifecycle Changes", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Updates", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "CTD Workspace", exact: true })).toBeVisible();
+  const mobileMenuToggle = page.getByTestId("mobile-menu-toggle");
+  const usesMobileMenu = await mobileMenuToggle.isVisible();
+  if (usesMobileMenu) await mobileMenuToggle.click();
+  const primaryNavigation = page.getByRole("navigation", {
+    name: usesMobileMenu ? "Mobile navigation" : "Primary navigation",
+  });
+
   await expect(
-    page.getByRole("heading", { name: "One execution hub. Four connected workspaces." }),
+    primaryNavigation.getByRole("link", { name: "Regulatory Updates", exact: true }),
   ).toBeVisible();
+  await expect(
+    primaryNavigation.getByRole("link", { name: "CTD Builder", exact: true }),
+  ).toBeVisible();
+  await expect(
+    primaryNavigation.getByRole("link", { name: "Trust & Sources", exact: true }),
+  ).toBeVisible();
+  await expect(primaryNavigation.getByRole("link", { name: "About", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Choose a live task." })).toBeVisible();
+  await expect(page.getByText("Submission Guides · Post-Approval Changes")).toBeVisible();
 });
 
 test("SEO endpoints expose indexable routes and protect planned thin pages", async ({
@@ -337,9 +353,9 @@ test("interactive CTD routes produce no browser console errors", async ({ page }
 
   await page.goto("/");
   await page
-    .getByRole("textbox", { name: "What are you preparing or trying to verify?" })
+    .getByRole("searchbox", { name: "What do you need to prepare or verify?" })
     .fill("FDA IND");
-  await page.getByRole("button", { name: "Find execution path" }).click();
+  await page.getByRole("button", { name: "Find a page" }).click();
   await page.goto("/submission-navigator/ctd/module-3/drug-product/3-2-p-5");
   await page.getByRole("button", { name: "Consistency checks" }).click();
   await page.goto("/submission-navigator/ctd/source-matrix");

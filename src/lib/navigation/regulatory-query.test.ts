@@ -32,6 +32,7 @@ describe("findRegulatoryPathways", () => {
     expect(matches[0]?.pathway.id).toBe("regulatory-updates");
     expect(matches[0]?.pathway.status).toBe("available");
     expect(matches[0]?.pathway.href).toBe("/regulatory-updates");
+    expect(matches.map(({ pathway }) => pathway.id)).toEqual(["regulatory-updates"]);
   });
 
   it("returns honest navigation fallbacks for an unmatched question", () => {

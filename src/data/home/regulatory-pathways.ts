@@ -278,8 +278,8 @@ export const regulatoryPathways: RegulatoryPathway[] = [
 ];
 
 export const exampleRegulatoryQueries = [
-  "What sources support 3.2.P.5?",
-  "How do I prepare the Quality Overall Summary?",
-  "Show FDA IND preparation support",
-  "What FDA and EMA updates are available?",
+  "Sources for 3.2.P.5",
+  "Quality Overall Summary",
+  "Latest FDA updates",
+  "Latest EMA updates",
 ];

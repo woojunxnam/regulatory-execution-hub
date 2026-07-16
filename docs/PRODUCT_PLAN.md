@@ -69,16 +69,17 @@ Labeling & e-Labeling
 
 - URL: `https://regulatory-execution-hub.vercel.app`
 - Production branch: `main`
-- Production baseline commit: `5d81907626b69cc8f8fc6e0bf8868827f4e81a90`
+- Production baseline commit: `d1895476d5c607c6f7962dc2a278a6543fb57831`
+- PR #2 merged; expanded CTD, Regulatory Updates, trust/policy pages, security headers, and SEO routes are public
+- Latest verified production suite: desktop/mobile `88/88` pass
 
-### Current hardening work
+### Current Home V2 work
 
-- Branch: `codex/deployment-phase2-hardening`
-- Draft PR: `https://github.com/woojunxnam/regulatory-execution-hub/pull/2`
-- Latest commit at plan update: `dd511e1`
-- CI/Vercel checks: pass
+- Branch: `codex/home-v2-production`
+- State: local release candidate; PR/deployment pending
+- Local checks: format/lint/type-check, `11 files / 44 tests`, `35` routes, desktop/mobile `88/88` pass
 - Qualified regulatory `ReviewRecord`: 없음
-- Local, uncommitted production-readiness work adds security headers, Open Graph social preview, and public `/about`, `/editorial-policy`, `/privacy`, `/corrections` governance routes.
+- Home V2 reduces the Home from about `652` to `330` words, from `5` to `3` top-level sections, and prioritizes live Updates/CTD tasks plus a deterministic page finder.
 - Domain decision: use the existing `.vercel.app` URL only for a non-commercial public prototype; choose an owned custom domain and intended-use hosting plan before a commercial launch.
 
 ### Implemented core
@@ -290,41 +291,41 @@ Source status와 editorial review status는 별개 field로 유지한다.
 
 이 sequence는 canonical phase number를 다시 정의하지 않는다. 현재 실행 순서만 관리한다.
 
-### Release 0 — Ship and verify Phase 2 hardening
+### Release 0 — Phase 2 hardening and public foundation
 
 Deliverables:
 
-- PR #2 review
-- Merge to `main`
-- Vercel production deployment
-- Expanded route production verification
+- PR #2 review and merge — complete
+- Vercel production deployment — complete
+- Expanded route production verification — complete, `88/88`
 - Current draft/human-review limitation 유지
 - Public trust pages, correction path, privacy boundary, social preview, and response security headers
 - Domain/plan decision appropriate to non-commercial versus commercial use
 
 Exit criteria:
 
-- Latest hardening이 production에 있음
-- Route, mobile, keyboard, accessibility, export, print checks pass
+- Latest hardening이 production에 있음 — complete
+- Route, mobile, keyboard, accessibility, export, print checks pass — complete
 - No false `human_reviewed` 또는 `reviewer_ready` state
-- Documentation reflects production commit
-- Security headers and social preview are verified from the production response
-- Public scope, editorial policy, privacy, and correction routes are reachable
+- Documentation reflects production commit — complete
+- Security headers and social preview are verified from the production response — complete
+- Public scope, editorial policy, privacy, and correction routes are reachable — complete
 
 ### Release 1 — Execution Hub foundation
 
-Implementation note — 2026-07-16:
+Implementation note — Home V2, 2026-07-16:
 
-- Home의 첫 화면을 `Ask Regulatory Execution Hub`로 재설계했다.
+- Home의 첫 화면을 `Find what to prepare`와 `Find a page by task` 중심으로 단순화했다.
 - 질문은 browser 안에서만 deterministic keyword/intent matching으로 처리하며 저장하거나 external LLM에 전송하지 않는다.
-- Available CTD/QOS/source/methodology route와 source-checked Regulatory Updates는 직접 연결한다. 미출시 FDA Initial IND, EMA Centralised MAA, lifecycle preparation은 `Planned`로 표시한다.
-- Top-level IA를 `Applications / Lifecycle Changes / Updates / CTD Workspace / Methodology`로 확장했다. CTD는 전체 제품이 아니라 첫 live execution layer로 표시한다.
+- Primary navigation에는 현재 live인 `Regulatory Updates / CTD Builder / Trust & Sources / About`만 둔다.
+- Available CTD/QOS/source/update route를 직접 연결하고, 미출시 application/lifecycle work는 compact `Coming next` 또는 planned search result로 표시한다.
+- Home에 latest 3 source-checked update record를 직접 노출한다.
 - `/applications`, `/lifecycle-changes`, `/regulatory-updates` route를 추가했다. Source-backed guide가 없는 lifecycle route는 `noindex`이며 sitemap에서 제외한다. Updates route는 8개 source-checked record와 detail pages를 제공하므로 indexable하고 sitemap에 포함된다.
 - Canonical metadata, `robots.txt`, `sitemap.xml`, web manifest, WebSite JSON-LD와 custom-domain-ready `NEXT_PUBLIC_SITE_URL`을 추가했다.
 - 이는 navigation layer이지 regulatory answer generation이 아니다. Source-backed RAG/LLM answer는 source coverage, citation contract, evaluation set, qualified review gate가 준비될 때까지 deferred 상태다.
-- Latest local verification: format, lint, type-check, 11 unit files/43 tests, production build 35 routes, desktop/mobile E2E 88/88 tests, Home, Updates, and 3.2.P.5 WCAG A/AA axe scans pass.
-- Production-readiness extension adds trust/policy routes, footer governance, security headers, and social preview. Production verification remains pending until merge/deployment.
-- Production 반영은 current branch review/merge와 Vercel deployment 후 별도로 확인한다.
+- Latest local verification: format, lint, type-check, 11 unit files/44 tests, production build 35 routes, desktop/mobile E2E 88/88 tests, Home, Updates, and 3.2.P.5 WCAG A/AA axe scans pass.
+- Home V2 density measurement: about 330 words, 3 top-level sections, 2317px page height at 1280 × 720.
+- Home V2 production 반영은 current branch review/merge와 Vercel deployment 후 별도로 확인한다.
 
 Deliverables:
 
@@ -563,11 +564,11 @@ user_confidence
 
 ## 12. Immediate next actions
 
-1. Complete full local validation for the production-readiness extension.
-2. Review and merge PR #2; verify production routes, security headers, social preview, and policy pages.
-3. Preserve qualified-human-review blocker as visible.
-4. Decide whether launch is non-commercial prototype or commercial; keep `.vercel.app` only for the former and plan an owned domain/appropriate hosting plan for the latter.
-5. Define shared `OfficialSource` and `ChecklistItem` schemas.
-6. Draft FDA Initial IND and EMA Centralised MAA source packages.
-7. Recruit first 5–10 target practitioners.
-8. Implement source-backed Release 1 content only after source package and acceptance criteria are frozen.
+1. Review, PR, merge, and production-verify Home V2.
+2. Preserve the qualified-human-review blocker as visible.
+3. Define shared `OfficialSource` and `ChecklistItem` schemas outside UI components.
+4. Freeze FDA Initial IND source package and checklist acceptance criteria; implement it as the first application guide.
+5. Prepare EMA Centralised MAA and FDA/EMA post-approval change source packages.
+6. Recruit first 5–10 CMC/RA target practitioners and run task-based usability tests.
+7. Decide whether launch remains a non-commercial prototype or moves toward commercial use; plan an owned domain and appropriate hosting plan before the latter.
+8. Add monitoring automation only after source cadence, editorial review, superseded handling, and correction ownership are defined.

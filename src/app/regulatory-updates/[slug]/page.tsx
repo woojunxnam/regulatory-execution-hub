@@ -82,7 +82,7 @@ export default async function RegulatoryUpdateDetailPage({
                 </dd>
               </div>
               <div>
-                <dt className="text-ink font-bold">Last verified</dt>
+                <dt className="text-ink font-bold">Official source checked</dt>
                 <dd className="mt-1">
                   <time dateTime={record.lastVerifiedDate}>{record.lastVerifiedDate}</time>
                 </dd>

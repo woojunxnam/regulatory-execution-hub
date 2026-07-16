@@ -56,7 +56,7 @@ export default function RegulatoryUpdatesPage() {
               </div>
             </dl>
             <p className="text-muted mt-4 text-xs leading-5">
-              Manual snapshot verified 2026-07-16. This is not continuous monitoring.
+              Manual snapshot last checked 2026-07-16. This is not continuous monitoring.
             </p>
           </div>
         }
@@ -146,7 +146,9 @@ export default function RegulatoryUpdatesPage() {
               ) : null}
 
               <div className="border-line mt-auto flex flex-wrap items-center justify-between gap-3 border-t pt-5">
-                <p className="text-muted text-xs">Verified {record.lastVerifiedDate}</p>
+                <p className="text-muted text-xs">
+                  Official source checked {record.lastVerifiedDate}
+                </p>
                 <Link
                   href={`/regulatory-updates/${record.slug}`}
                   className="text-teal inline-flex items-center gap-2 text-sm font-bold underline"
