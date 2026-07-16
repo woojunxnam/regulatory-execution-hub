@@ -4,7 +4,7 @@ Last updated: `2026-07-16`
 
 ## 현재 단계
 
-PR #2의 Phase 2 hardening과 Regulatory Updates MVP는 `main` production에 반영되었습니다. 현재 작업은 `codex/home-v2-production` branch의 Home V2 release candidate를 검증하고 production으로 승격하는 단계입니다.
+PR #2의 Phase 2 hardening과 Regulatory Updates MVP, PR #3의 Home V2가 `main` production에 반영되었습니다. 현재 production release는 live Regulatory Updates와 CTD task를 우선하고, application/lifecycle guide는 source-backed workflow가 준비될 때까지 planned로 유지합니다.
 
 기술적 Stage A public prototype gate는 충족할 수 있지만, qualified human review가 없으므로 regulatory content를 `human_reviewed` 또는 `reviewer_ready`로 상향하지 않습니다. 이 governance blocker는 Home V2 deployment와 별개로 유지됩니다.
 
@@ -12,11 +12,10 @@ PR #2의 Phase 2 hardening과 Regulatory Updates MVP는 `main` production에 반
 
 - URL: `https://regulatory-execution-hub.vercel.app`
 - Production branch: `main`
-- Verified production commit: `d1895476d5c607c6f7962dc2a278a6543fb57831`
-- Merged PR: `#2`
+- Home V2 application commit: `ac6c3ad576edddf2e54819bc42477a540dfb9dd2`
+- Merged PRs: `#2`, `#3`
 - Production verification: desktop/mobile Playwright `88/88` pass
 - Public routes: `35` static/SSG routes
-- Current release candidate: `codex/home-v2-production`
 
 ## 구현 완료
 
@@ -29,7 +28,7 @@ PR #2의 Phase 2 hardening과 Regulatory Updates MVP는 `main` production에 반
 - source/document/editorial status, source date, last-verification date, applicability boundary
 - About, Editorial Policy, Privacy, Corrections, security headers, canonical, robots, sitemap, manifest, social preview
 
-## Home V2 release candidate
+## Home V2 production release
 
 - 첫 화면을 `Regulatory Updates + CTD Quality` live scope 중심으로 재구성
 - main navigation을 live routes 4개로 축소: `Regulatory Updates`, `CTD Builder`, `Trust & Sources`, `About`
@@ -71,8 +70,8 @@ Update의 `Official source checked`는 official page와 metadata를 확인했다
 
 ## 다음 작업
 
-1. Home V2 PR을 review, merge, Vercel production deploy하고 public `88/88`을 재검증합니다.
-2. Shared `OfficialSource`와 `ChecklistItem` schema를 확정합니다.
-3. FDA Initial IND source package와 checklist acceptance criteria를 먼저 구현합니다.
-4. Qualified RA reviewer를 확보하고 review record workflow를 실제 운영합니다.
-5. 첫 5–10명 CMC/RA user interview와 usability test로 task priority를 검증합니다.
+1. Shared `OfficialSource`와 `ChecklistItem` schema를 확정합니다.
+2. FDA Initial IND source package와 checklist acceptance criteria를 먼저 구현합니다.
+3. Qualified RA reviewer를 확보하고 review record workflow를 실제 운영합니다.
+4. 첫 5–10명 CMC/RA user interview와 usability test로 task priority를 검증합니다.
+5. Monitoring cadence, superseded handling, correction ownership이 정해진 뒤 update detection automation을 설계합니다.
