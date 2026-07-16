@@ -5,6 +5,8 @@ export interface RegulatoryPathwayMatch {
   score: number;
 }
 
+const lowSignalTokens = new Set(["fda", "ema", "eu", "us"]);
+
 function normalize(value: string) {
   return value
     .toLowerCase()
@@ -28,9 +30,19 @@ function scoreKeyword(query: string, queryTokens: Set<string>, keyword: string) 
   if (!normalizedKeyword) return 0;
 
   const keywordTokens = tokenize(normalizedKeyword);
-  const phraseScore = query.includes(normalizedKeyword) ? 24 + keywordTokens.size * 9 : 0;
+  const lowSignalKeyword =
+    keywordTokens.size === 1 && lowSignalTokens.has([...keywordTokens][0] ?? "");
+  const phraseScore = query.includes(normalizedKeyword)
+    ? lowSignalKeyword
+      ? 3
+      : 24 + keywordTokens.size * 9
+    : 0;
   const tokenOverlap = [...keywordTokens].filter((token) => queryTokens.has(token)).length;
-  const overlapScore = tokenOverlap === keywordTokens.size ? tokenOverlap * 7 : tokenOverlap * 2;
+  const overlapScore = lowSignalKeyword
+    ? tokenOverlap * 2
+    : tokenOverlap === keywordTokens.size
+      ? tokenOverlap * 7
+      : tokenOverlap * 2;
 
   return phraseScore + overlapScore;
 }
@@ -58,7 +70,12 @@ export function findRegulatoryPathways(query: string, limit = 3): RegulatoryPath
       (left, right) => right.score - left.score || right.pathway.priority - left.pathway.priority,
     );
 
-  if (matches.length > 0) return matches.slice(0, limit);
+  if (matches.length > 0) {
+    const strongestScore = matches[0]?.score ?? 0;
+    const relevanceFloor = Math.max(8, Math.ceil(strongestScore * 0.3));
+
+    return matches.filter((match) => match.score >= relevanceFloor).slice(0, limit);
+  }
 
   return regulatoryPathways
     .filter((pathway) => ["ctd-builder", "source-matrix", "methodology"].includes(pathway.id))
